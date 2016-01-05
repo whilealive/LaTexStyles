@@ -1,0 +1,61 @@
+% ==================================================================
+% FILE     basicPresentationStyle.sty
+% MACHINE  all
+% INFO     Preamble für alle LaTex Präsentationen
+%
+% DATE     21.11.2015
+% OWNER    Bischofberger
+% ==================================================================
+
+\ProvidesPackage{basicPresentationStyle}
+
+% theme
+\usetheme{default}
+\usecolortheme{default}
+\usefonttheme{professionalfonts}
+\beamertemplatenavigationsymbolsempty
+
+% colors
+\definecolor{title}{RGB}{35,90,20}
+\setbeamercolor{titlelike}{fg=title}
+\setbeamercolor{block title}{fg=title}
+\setbeamercolor{block title example}{fg=title}
+\setbeamercolor{enumerate item}{fg=title}
+\setbeamercolor{itemize item}{fg=title}
+
+% fonts
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{lmodern}
+
+% typography
+\usepackage{microtype}
+\usepackage{nicefrac}
+\usepackage{siunitx}
+\usepackage{eurosym}
+
+% drawings
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\tikzset{partial ellipse/.style args={#1:#2:#3}{insert path={+ (#1:#3) arc (#1:#2:#3)}}}
+
+% math packages
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bm}
+
+% various math stuff
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}  % mathtools: abs*{...} command
+
+% tables, lists...
+% don't load enumitem for beamer!
+\usepackage{array}
+\usepackage{tabularx}
+
+% floats, figures, boxes...
+\usepackage{float}
+
+% frames
+\usepackage[framemethod=tikz]{mdframed}

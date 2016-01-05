@@ -1,0 +1,77 @@
+% ==================================================================
+% FILE     basicDocumentStyle.sty
+% MACHINE  all
+% INFO     Preamble für alle LaTex Dokumente
+%
+% DATE     28.12.2015
+% OWNER    Bischofberger
+% ==================================================================
+% TODO: better solution for multicol
+
+\ProvidesPackage{basicDocumentStyle}
+
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\setlength{\parindent}{0pt}
+
+% fonts
+\usepackage{lmodern}
+
+% additional symbols etc.
+\usepackage[babel=true]{microtype}
+\usepackage{siunitx}
+\usepackage{eurosym}
+\usepackage{url}
+
+% header/footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.3pt}
+
+% add empty pages
+\usepackage{afterpage}
+\newcommand\blankpage{
+  \null
+  \thispagestyle{empty}
+\newpage}
+
+% KOMA script stuff
+\RedeclareSectionCommand[beforeskip=2em,afterskip=1em]{section}
+\RedeclareSectionCommand[beforeskip=2em]{subsection}
+\RedeclareSectionCommand[beforeskip=1em,afterskip=1sp]{subsubsection}
+
+% graphics
+\usepackage{graphicx}
+
+% captions
+\usepackage{caption} 
+\captionsetup[figure]{name=Abb,font=small,format=plain}
+
+% tables
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multicol}
+\setlength\multicolsep{0pt}
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}  % centered column type for tabularx
+
+% lists
+\usepackage{enumitem}
+\setlist{leftmargin=*,nolistsep}        % global: no left indent, no vertical sep. for any list
+\newlist{enumerateAlph}{enumerate}{1}   % enumerate with label=\alph) and (really) no left indent
+\setlist[enumerateAlph,1]{label=\alph*),labelindent=-0.3em}
+
+% floats, figures, boxes...
+\usepackage{float}
+%\usepackage{wrapfig}
+%\usepackage{subfigure}
+
+% ----------------------------------------------------------------
+% custom commands and environments...
+% ----------------------------------------------------------------
+\newcommand{\BZ}[1][1]{\vspace{#1em}}  % 1 Blindzeile
+
+% Text auf Seite von unten nach oben
+\newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
+
