@@ -4,7 +4,7 @@
 % INFO     Preamble für Mathe-Aufgabenblätter usw.
 %          basicDocumentStyle muss zuerst geladen werden
 %
-% DATE     05.01.2016
+% DATE     12.01.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -62,8 +62,7 @@
 \end{tikzpicture}}
 
 % Lineare Gleichungssysteme
-% TODO: replace by conventional \newenvironment command and 
-% remove environ package
+% "environ"-package ist hier notwendig aufgrund der verschachtelten Umgebungen.
 \usepackage{environ}
 \NewEnviron{EQ}
 {
