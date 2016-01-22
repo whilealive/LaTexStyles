@@ -4,7 +4,7 @@
 % INFO     Preamble für Mathe-Aufgabenblätter usw.
 %          basicDocumentStyle muss zuerst geladen werden
 %
-% DATE     12.01.2016
+% DATE     22.01.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -34,6 +34,7 @@
 \theoremstyle{MyStyle}
 \newtheorem{Def}{Definition}
 \newtheorem{Bsp}{Beispiel}
+\newtheorem{Bem}{Bemerkung}
 
 % drawings
 \usepackage{tikz}
@@ -45,6 +46,8 @@
 % ----------------------------------------------------------------
 % custom commands and environments...
 % ----------------------------------------------------------------
+% "environ"-package für verschachtelte Umgebungen innerhalb neuer Umgebung
+\usepackage{environ}
 
 % Notizpapier.
 % - Berechnet optimale Häuschengrösse (+- 4mm) und Anzahl Häuschen, 
@@ -62,8 +65,6 @@
 \end{tikzpicture}}
 
 % Lineare Gleichungssysteme
-% "environ"-package ist hier notwendig aufgrund der verschachtelten Umgebungen.
-\usepackage{environ}
 \NewEnviron{EQ}
 {
   \begin{align*}
@@ -96,4 +97,15 @@
 \newenvironment{LsgAufg}[1]{
   \textbf{Aufg. \ref{#1} }}
 {\par\addvspace{.5em}}
+
+% Definiton mit grauem Rand
+\NewEnviron{FrameDef}
+{
+  \begin{mdframed}[linecolor=gray!40!,linewidth=2pt,innertopmargin=1pt,innerbottommargin=\topskip]
+    \BZ
+    \begin{Def}
+      \BODY
+    \end{Def}
+  \end{mdframed}
+}
 
