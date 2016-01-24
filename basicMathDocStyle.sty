@@ -4,7 +4,7 @@
 % INFO     Preamble für Mathe-Aufgabenblätter usw.
 %          basicDocumentStyle muss zuerst geladen werden
 %
-% DATE     22.01.2016
+% DATE     24.01.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -90,6 +90,12 @@
   \refstepcounter{excounter}
   %\BZ
   \noindent\textbf{Aufgabe~\theexcounter\enspace}}
+{\par\addvspace{0em}}
+
+\newenvironment{Aufg*}[0]{
+  \refstepcounter{excounter}
+  %\BZ
+  \noindent\textbf{Aufgabe~\theexcounter*\enspace}}
 {\par\addvspace{0em}}
 
 % Lösung einer einzelnen Aufgabe.
