@@ -1,0 +1,89 @@
+% ==================================================================
+% FILE     basicDocumentStyle2.sty
+% MACHINE  all
+% INFO     Preamble für alle LaTex Dokumente (Libertine font!)
+%
+% DATE     03.02.2016
+% OWNER    Bischofberger
+% ==================================================================
+
+\ProvidesPackage{basicDocumentStyle2}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+\setlength{\parindent}{0pt}
+
+% additional symbols etc.
+\usepackage[babel=true]{microtype}
+\usepackage{siunitx}
+\RequirePackage{fix-cm}
+\usepackage{eurosym}
+\usepackage{url}
+
+% math stuff (must be loaded before newtxmath)
+\usepackage{amsthm}
+\usepackage{bm}
+
+% fonts
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+\usepackage[varqu,varl]{zi4}  % inconsolata
+\useosf
+
+% header/footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.3pt}
+
+% add empty pages
+\usepackage{afterpage}
+\newcommand\blankpage{
+  \null
+  \thispagestyle{empty}
+\newpage}
+
+% KOMA script stuff
+\RedeclareSectionCommand[beforeskip=2em,afterskip=1em]{section}
+\RedeclareSectionCommand[beforeskip=2em]{subsection}
+\RedeclareSectionCommand[beforeskip=1em,afterskip=1sp]{subsubsection}
+\addtokomafont{disposition}{\rmfamily}
+
+% graphics
+\usepackage{graphicx}
+
+% captions
+\usepackage{caption} 
+\captionsetup[figure]{name=Abb,font=small,format=plain}
+
+% tables
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}  % centered column type for tabularx
+
+% lists
+\usepackage[inline]{enumitem}
+\setlist{leftmargin=*,nolistsep}        % global: no left indent, no vertical sep. for any list
+\newlist{enumerateAlph}{enumerate}{1}   % enumerate with label=\alph) and (really) no left indent
+\setlist[enumerateAlph,1]{label=\alph*),labelindent=-0.3em}
+
+% TODO: replace multicol with Tabbedenum
+\usepackage{multicol}        % to be replaced
+\setlength\multicolsep{0pt}  % to be replaced
+\usepackage{tabto}
+\newenvironment{Tabbedenum}[1]
+ {\NumTabs{#1}\begin{enumerate*}[label=\emph{\alph*}),itemjoin={\tab}]}{\end{enumerate*}}
+
+
+% floats, figures, boxes...
+\usepackage{float}
+
+% ----------------------------------------------------------------
+% custom commands and environments...
+% ----------------------------------------------------------------
+\newcommand{\BZ}[1][1]{\vspace{#1em}}  % 1 Blindzeile
+
+% Text auf Seite von unten nach oben
+\newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
+
