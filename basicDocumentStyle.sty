@@ -3,10 +3,9 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     28.12.2015
+% DATE     30.01.2016
 % OWNER    Bischofberger
 % ==================================================================
-% TODO: better solution for multicol
 
 \ProvidesPackage{basicDocumentStyle}
 
@@ -51,21 +50,25 @@
 % tables
 \usepackage{array}
 \usepackage{booktabs}
-\usepackage{multicol}
-\setlength\multicolsep{0pt}
 \usepackage{tabularx}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}  % centered column type for tabularx
 
 % lists
-\usepackage{enumitem}
+\usepackage[inline]{enumitem}
 \setlist{leftmargin=*,nolistsep}        % global: no left indent, no vertical sep. for any list
 \newlist{enumerateAlph}{enumerate}{1}   % enumerate with label=\alph) and (really) no left indent
 \setlist[enumerateAlph,1]{label=\alph*),labelindent=-0.3em}
 
+% TODO: replace multicol with Tabbedenum
+\usepackage{multicol}        % to be replaced
+\setlength\multicolsep{0pt}  % to be replaced
+\usepackage{tabto}
+\newenvironment{Tabbedenum}[1]
+ {\NumTabs{#1}\begin{enumerate*}[label=\emph{\alph*}),itemjoin={\tab}]}{\end{enumerate*}}
+
+
 % floats, figures, boxes...
 \usepackage{float}
-%\usepackage{wrapfig}
-%\usepackage{subfigure}
 
 % ----------------------------------------------------------------
 % custom commands and environments...
