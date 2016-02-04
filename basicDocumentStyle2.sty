@@ -3,21 +3,19 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente (Libertine font!)
 %
-% DATE     03.02.2016
+% DATE     04.02.2016
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{basicDocumentStyle2}
 
-\usepackage[T1]{fontenc}
-\usepackage[utf8x]{inputenc}
 \usepackage[ngerman]{babel}
 \setlength{\parindent}{0pt}
 
 % additional symbols etc.
+\RequirePackage{fix-cm}
 \usepackage[babel=true]{microtype}
 \usepackage{siunitx}
-\RequirePackage{fix-cm}
 \usepackage{eurosym}
 \usepackage{url}
 
@@ -26,10 +24,11 @@
 \usepackage{bm}
 
 % fonts
-\usepackage{libertine}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\setromanfont[Mapping=tex-text]{Linux Libertine}
 \usepackage[libertine]{newtxmath}
-\usepackage[varqu,varl]{zi4}  % inconsolata
-\useosf
 
 % header/footer
 \usepackage{fancyhdr}
@@ -47,7 +46,6 @@
 \RedeclareSectionCommand[beforeskip=2em,afterskip=1em]{section}
 \RedeclareSectionCommand[beforeskip=2em]{subsection}
 \RedeclareSectionCommand[beforeskip=1em,afterskip=1sp]{subsubsection}
-\addtokomafont{disposition}{\rmfamily}
 
 % graphics
 \usepackage{graphicx}
