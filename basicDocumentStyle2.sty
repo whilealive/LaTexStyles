@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente (Libertine font!)
 %
-% DATE     04.02.2016
+% DATE     08.02.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -27,9 +27,16 @@
 \usepackage{fontspec}
 \usepackage{xunicode}
 \usepackage{xltxtra}
+
 \setromanfont[Mapping=tex-text]{Linux Libertine O}
 \setsansfont{Linux Biolinum O}
 \usepackage[libertine]{newtxmath}
+
+% MS Cambria
+%\usepackage{amsmath}
+%\usepackage{unicode-math}
+%\setmainfont[Mapping=tex-text]{Cambria}
+%\setmathfont{Cambria Math}
 
 % header/footer
 \usepackage{fancyhdr}
@@ -47,6 +54,8 @@
 \RedeclareSectionCommand[beforeskip=2em,afterskip=1em]{section}
 \RedeclareSectionCommand[beforeskip=2em]{subsection}
 \RedeclareSectionCommand[beforeskip=1em,afterskip=1sp]{subsubsection}
+\addtokomafont{disposition}{\rmfamily}
+%\setkomafont{disposition}{\normalfont}  % not bold
 
 % graphics
 \usepackage{graphicx}
@@ -57,6 +66,7 @@
 
 % tables
 \usepackage{array}
+\usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}  % centered column type for tabularx
