@@ -4,7 +4,7 @@
 % INFO     Preamble für Mathe-Aufgabenblätter usw.
 %          basicDocumentStyle muss zuerst geladen werden
 %
-% DATE     03.02.2016
+% DATE     09.02.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -56,19 +56,6 @@
     \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin] 
       (0,0) grid (\myLineWidth pt, {#1 * \sizeOfSquares pt});
 \end{tikzpicture}}
-
-% Lineare Gleichungssysteme
-% TODO: delete
-\NewEnviron{EQ}
-{
-  \begin{align*}
-    \left|
-    \begin{array}{rcrcrcrcrcrcrcrcrcrcrc}
-      \BODY
-    \end{array}
-    \right|
-  \end{align*}
-}
 
 % Umgebung "Aufgabe", mit und ohne Label für Lösungen.
 \newcounter{excounter}
