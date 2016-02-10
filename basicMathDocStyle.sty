@@ -4,7 +4,7 @@
 % INFO     Preamble für Mathe-Aufgabenblätter usw.
 %          basicDocumentStyle muss zuerst geladen werden
 %
-% DATE     08.02.2016
+% DATE     10.02.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -87,7 +87,6 @@
 {\par\addvspace{0em}}
 
 % Lösung einer einzelnen Aufgabe.
-% Wird in \begin{Lsg} -- \end{Lsg} eingebettet
 \newenvironment{LsgAufg}[1]{
   \textbf{Aufg. \ref{#1} }}
 {\par\addvspace{.5em}}
@@ -102,4 +101,7 @@
     \end{Def}
   \end{mdframed}
 }
+
+% Doppelt unterstrichen
+\newcommand{\Result}[1]{\underline{\underline{#1}}}
 
