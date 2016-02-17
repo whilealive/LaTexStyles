@@ -3,19 +3,19 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     09.02.2016
+% DATE     17.02.2016
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{basicDocumentStyle}
 
 \usepackage[ngerman]{babel}
-\usepackage[T1]{fontenc}
 \usepackage[utf8x]{inputenc}
 \setlength{\parindent}{0pt}
 
 % fonts
-\usepackage{lmodern}
+\usepackage{fourier}
+\usepackage[scaled=0.875]{helvet}  % ss
 
 % additional symbols etc.
 \usepackage[babel=true]{microtype}
@@ -24,10 +24,15 @@
 \usepackage{eurosym}
 \usepackage{url}
 
-% header/footer
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\renewcommand{\headrulewidth}{0.3pt}
+% header/footer (KOMA-Script)
+\usepackage[headsepline,plainheadsepline]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\setkomafont{pageheadfoot}{\normalfont}
+
+% various KOMA script stuff
+\RedeclareSectionCommand[beforeskip=2em,afterskip=1em]{section}
+\RedeclareSectionCommand[beforeskip=2em]{subsection}
+\RedeclareSectionCommand[beforeskip=1em,afterskip=1sp]{subsubsection}
 
 % add empty pages
 \usepackage{afterpage}
@@ -35,11 +40,6 @@
   \null
   \thispagestyle{empty}
 \newpage}
-
-% KOMA script stuff
-\RedeclareSectionCommand[beforeskip=2em,afterskip=1em]{section}
-\RedeclareSectionCommand[beforeskip=2em]{subsection}
-\RedeclareSectionCommand[beforeskip=1em,afterskip=1sp]{subsubsection}
 
 % graphics
 \usepackage{graphicx}
@@ -60,14 +60,8 @@
 \setlist{leftmargin=*,nolistsep}        % global: no left indent, no vertical sep. for any list
 \newlist{enumerateAlph}{enumerate}{1}   % enumerate with label=\alph) and (really) no left indent
 \setlist[enumerateAlph,1]{label=\alph*),labelindent=-0.3em}
-
-% TODO: replace multicol with Tabbedenum
-\usepackage{multicol}        % to be replaced
-\setlength\multicolsep{0pt}  % to be replaced
-\usepackage{tabto}
-\newenvironment{Tabbedenum}[1]
- {\NumTabs{#1}\begin{enumerate*}[label=\emph{\alph*}),itemjoin={\tab}]}{\end{enumerate*}}
-
+\usepackage{multicol} 
+\setlength\multicolsep{0pt}
 
 % floats, figures, boxes...
 \usepackage{float}
@@ -79,4 +73,11 @@
 
 % Text auf Seite von unten nach oben
 \newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
+
+% tabbing without sep
+\newenvironment{nstabbing}
+{\setlength{\topsep}{0pt}%
+  \setlength{\partopsep}{0pt}%
+\tabbing}
+{\endtabbing}
 
