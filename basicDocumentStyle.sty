@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     17.02.2016
+% DATE     18.02.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -46,7 +46,13 @@
 
 % captions
 \usepackage{caption} 
-\captionsetup[figure]{name=Abb,font=small,format=plain}
+\captionsetup[figure]{
+  name=Abb,
+  font=small,
+  format=plain,
+  justification=raggedright,
+  singlelinecheck=false
+}
 
 % tables
 \usepackage{array}
