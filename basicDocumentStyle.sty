@@ -3,19 +3,19 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     18.02.2016
+% DATE     20.02.2016
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{basicDocumentStyle}
 
-\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
 \usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
 \setlength{\parindent}{0pt}
 
 % fonts
-\usepackage{fourier}
-\usepackage[scaled=0.875]{helvet}  % ss
+\usepackage{lmodern}
 
 % additional symbols etc.
 \usepackage[babel=true]{microtype}
@@ -75,7 +75,7 @@
 % ----------------------------------------------------------------
 % custom commands and environments...
 % ----------------------------------------------------------------
-\newcommand{\BZ}[1][1]{\vspace{#1em}}  % 1 Blindzeile
+\newcommand{\BZ}[1][1]{\vspace*{#1\baselineskip}}  % 1 Blindzeile
 
 % Text auf Seite von unten nach oben
 \newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
