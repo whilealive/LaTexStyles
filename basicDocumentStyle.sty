@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     20.02.2016
+% DATE     30.03.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -59,7 +59,8 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{tabularx}
-\newcolumntype{Y}{>{\centering\arraybackslash}X}  % centered column type for tabularx
+\newcolumntype{Y}{>{\centering\arraybackslash}X}           % centered column type for tabularx
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}  % fixed width left-justified column
 
 % lists
 \usepackage[inline]{enumitem}
@@ -87,3 +88,7 @@
 \tabbing}
 {\endtabbing}
 
+% Struts for added vertical spacing in tabular environments
+% Insert struts directly in nominator/denominator/sub-/superscripts of fractions/sums etc.!
+\newcommand\TStrut{\rule{0pt}{2.6ex}}       % Top strut
+\newcommand\BStrut{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
