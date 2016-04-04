@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     30.03.2016
+% DATE     31.03.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -67,6 +67,8 @@
 \setlist{leftmargin=*,nolistsep}        % global: no left indent, no vertical sep. for any list
 \newlist{enumerateAlph}{enumerate}{1}   % enumerate with label=\alph) and (really) no left indent
 \setlist[enumerateAlph,1]{label=\alph*),labelindent=-0.3em}
+\newlist{enumerateAlph*}{enumerate*}{1} 
+\setlist[enumerateAlph*,1]{label=\alph*),itemjoin=\quad}
 \usepackage{multicol} 
 \setlength\multicolsep{0pt}
 
