@@ -4,7 +4,7 @@
 % INFO     Preamble für Mathe-Aufgabenblätter usw.
 %          basicDocumentStyle muss zuerst geladen werden
 %
-% DATE     20.02.2016
+% DATE     07.04.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -22,14 +22,14 @@
 
 % math theorems
 \newtheoremstyle{MyStyle}
-{1em}						% space above
-{1em}						% space below
-{}							% body font
-{}							% indent amount
-{\bfseries}			% Theorem head font
-{.}							% punctuation after theorem head
-{.5em}					% space after theorem head
-{\thmname{#1}}	% theorem head spec
+{\baselineskip}	 % space above
+{\baselineskip}	 % space below
+{}							 % body font
+{}							 % indent amount
+{\bfseries}			 % Theorem head font
+{.}							 % punctuation after theorem head
+{.5em}					 % space after theorem head
+{\thmname{#1}}	 % theorem head spec
 
 \theoremstyle{MyStyle}
 \newtheorem{Def}{Definition}
