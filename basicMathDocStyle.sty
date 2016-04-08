@@ -54,7 +54,7 @@
 %   um \linewidth aufzufüllen.
 % - Argument: Anzahl Reihen (= vertikale Höhe)
 \newcommand{\Notes}[1]{
-  \par\vspace{.5em}
+  \par\vspace{.5\baselineskip}
   \begin{tikzpicture}[scale=1]
     \pgfmathparse{\linewidth - \pgflinewidth}
     \xdef\myLineWidth{\pgfmathresult}  % correct width without line caps
@@ -71,27 +71,27 @@
   \refstepcounter{excounter}
   \label{#1}
   \noindent\textbf{Aufgabe~\theexcounter$^{\bm{L}}$\enspace}}
-{\par\addvspace{1em}}
+{\par\addvspace{\baselineskip}}
 
 \newenvironment{Aufg}[0]{
   \refstepcounter{excounter}
   \noindent\textbf{Aufgabe~\theexcounter\enspace}}
-{\par\addvspace{1em}}
+{\par\addvspace{\baselineskip}}
 
 \newenvironment{Aufg*}[0]{
   \refstepcounter{excounter}
   \noindent\textbf{Aufgabe~\theexcounter*\enspace}}
-{\par\addvspace{1em}}
+{\par\addvspace{\baselineskip}}
 
 % Lösung einer einzelnen Aufgabe.
 \newenvironment{LsgAufg}[1]{
   \textbf{Aufg. \ref{#1} }}
-{\par\addvspace{.5em}}
+{\par\addvspace{.5\baselineskip}}
 
 % Definiton mit grauem Rand
 \NewEnviron{FrameDef}
 {
-  \begin{mdframed}[linecolor=gray!40!,linewidth=2pt,innertopmargin=1pt,innerbottommargin=\topskip]
+  \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=1pt,innerbottommargin=\topskip]
     \begin{Def}
       \BODY
     \end{Def}
