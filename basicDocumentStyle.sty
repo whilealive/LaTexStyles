@@ -3,29 +3,29 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     05.04.2016
+% DATE     12.04.2016
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{basicDocumentStyle}
 
-\usepackage[T1]{fontenc}
-\usepackage[utf8x]{inputenc}
-\usepackage[ngerman]{babel}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8x]{inputenc}
+\RequirePackage[ngerman]{babel}
 \setlength{\parindent}{0pt}
 
 % fonts
-\usepackage{lmodern}
+\RequirePackage{lmodern}
 
 % additional symbols etc.
-\usepackage[babel=true]{microtype}
-\usepackage{siunitx}
+\RequirePackage[babel=true]{microtype}
+\RequirePackage{siunitx}
 \sisetup{per-mode=symbol}
-\usepackage{eurosym}
-\usepackage{url}
+\RequirePackage{eurosym}
+\RequirePackage{url}
 
 % header/footer (KOMA-Script)
-\usepackage[headsepline,plainheadsepline]{scrlayer-scrpage}
+\RequirePackage[headsepline,plainheadsepline]{scrlayer-scrpage}
 \pagestyle{scrheadings}
 \setkomafont{pageheadfoot}{\normalfont}
 
@@ -35,17 +35,17 @@
 \RedeclareSectionCommand[beforeskip=1\baselineskip,afterskip=1sp]{subsubsection}
 
 % add empty pages
-\usepackage{afterpage}
+\RequirePackage{afterpage}
 \newcommand\blankpage{
   \null
   \thispagestyle{empty}
 \newpage}
 
 % graphics
-\usepackage{graphicx}
+\RequirePackage{graphicx}
 
 % captions
-\usepackage{caption} 
+\RequirePackage{caption} 
 \captionsetup[figure]{
   name=Abb,
   font=small,
@@ -55,25 +55,25 @@
 }
 
 % tables
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{booktabs}
-\usepackage{tabularx}
+\RequirePackage{array}
+\RequirePackage{multirow}
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}           % centered column type for tabularx
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}  % fixed width left-justified column
 
 % lists
-\usepackage[inline]{enumitem}
+\RequirePackage[inline]{enumitem}
 \setlist{leftmargin=*,nosep}            % global: no left indent, no vertical sep. for any list
 \newlist{enumerateAlph}{enumerate}{1}   % enumerate with label=\alph) and (really) no left indent
 \newlist{enumerateAlph*}{enumerate*}{1} 
 \setlist[enumerateAlph,1]{label=\alph*),labelindent=-0.3em}
 \setlist[enumerateAlph*,1]{label=\alph*),itemjoin=\quad}
-\usepackage{multicol} 
+\RequirePackage{multicol} 
 \setlength\multicolsep{0pt}
 
 % floats, figures, boxes...
-\usepackage{float}
+\RequirePackage{float}
 
 % ----------------------------------------------------------------
 % custom commands and environments...

@@ -4,17 +4,17 @@
 % INFO     Preamble für Mathe-Aufgabenblätter usw.
 %          basicDocumentStyle muss zuerst geladen werden
 %
-% DATE     07.04.2016
+% DATE     12.04.2016
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{basicMathDocStyle}
 
 % math packages
-\usepackage{mathtools}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{bm}
+\RequirePackage{mathtools}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{bm}
 
 % various math options
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}  % mathtools: abs*{...} command
@@ -37,17 +37,17 @@
 \newtheorem{Bem}{Bemerkung}
 
 % drawings
-\usepackage{tikz}
-\usepackage{tikzStyle}
+\RequirePackage{tikz}
+\RequirePackage{tikzStyle}
 
 % frames
-\usepackage[framemethod=tikz]{mdframed}
+\RequirePackage[framemethod=tikz]{mdframed}
 
 % ----------------------------------------------------------------
 % custom commands and environments...
 % ----------------------------------------------------------------
 % "environ"-package für verschachtelte Umgebungen innerhalb neuer Umgebung
-\usepackage{environ}
+\RequirePackage{environ}
 
 % Notizpapier.
 % - Berechnet optimale Häuschengrösse (+- 4mm) und Anzahl Häuschen, 
