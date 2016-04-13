@@ -1,13 +1,21 @@
 % ==================================================================
 % FILE     basicPresentationStyle.sty
 % MACHINE  all
-% INFO     Preamble für alle LaTex Präsentationen
+% INFO     Documentclass for all LatTex Presentations
+%          Vorlage unter:
+%          ~/Documents/Studium/Lehramt/Fachdidaktik_III/Klassische-Probleme-der-Antike/
 %
-% DATE     12.04.2016
+% DATE     13.04.2016
 % OWNER    Bischofberger
 % ==================================================================
 
-\ProvidesPackage{basicPresentationStyle}
+\ProvidesClass{myBeamer}
+\NeedsTeXFormat{LaTeX2e}
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
+\ProcessOptions\relax
+
+\LoadClass{beamer}
 
 % theme
 \usetheme{default}
@@ -35,19 +43,8 @@
 \RequirePackage{siunitx}
 \RequirePackage{eurosym}
 
-% drawings
-\RequirePackage{tikz}
-\usetikzlibrary{calc}
-\tikzset{partial ellipse/.style args={#1:#2:#3}{insert path={+ (#1:#3) arc (#1:#2:#3)}}}
-
 % math packages
-\RequirePackage{mathtools}
-\RequirePackage{amsfonts}
-\RequirePackage{amssymb}
-\RequirePackage{bm}
-
-% various math stuff
-\DeclarePairedDelimiter\abs{\lvert}{\rvert}  % mathtools: abs*{...} command
+\RequirePackage{basicMathDocStyle}
 
 % tables, lists...
 % don't load enumitem for beamer!
@@ -56,6 +53,3 @@
 
 % floats, figures, boxes...
 \RequirePackage{float}
-
-% frames
-\RequirePackage[framemethod=tikz]{mdframed}
