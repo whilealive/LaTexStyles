@@ -1,14 +1,16 @@
 % ==================================================================
 % FILE     basicMathDocStyle.sty
 % MACHINE  all
-% INFO     Preamble für Mathe-Aufgabenblätter usw.
-%          basicDocumentStyle muss zuerst geladen werden
+% INFO     Preamble for my math documents
 %
-% DATE     12.04.2016
+% DATE     15.04.2016
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{basicMathDocStyle}
+
+% depends on my basic style
+\RequirePackage{basicDocumentStyle}
 
 % math packages
 \RequirePackage{mathtools}
@@ -54,7 +56,7 @@
 %   um \linewidth aufzufüllen.
 % - Argument: Anzahl Reihen (= vertikale Höhe)
 \newcommand{\Notes}[1]{
-  \par\vspace{.5\baselineskip}
+  \BZ[.5]
   \begin{tikzpicture}[scale=1]
     \pgfmathparse{\linewidth - \pgflinewidth}
     \xdef\myLineWidth{\pgfmathresult}  % correct width without line caps
