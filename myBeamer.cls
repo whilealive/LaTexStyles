@@ -1,11 +1,11 @@
 % ==================================================================
-% FILE     basicPresentationStyle.sty
+% FILE     myBeamer.cls
 % MACHINE  all
 % INFO     Documentclass for all LatTex Presentations
 %          Vorlage unter:
 %          ~/Documents/Studium/Lehramt/Fachdidaktik_III/Klassische-Probleme-der-Antike/
 %
-% DATE     13.04.2016
+% DATE     17.04.2016
 % OWNER    Bischofberger
 % ==================================================================
 

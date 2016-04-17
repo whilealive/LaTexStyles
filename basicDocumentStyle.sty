@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     12.04.2016
+% DATE     17.04.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -33,13 +33,6 @@
 \RedeclareSectionCommand[beforeskip=2\baselineskip,afterskip=\baselineskip]{section}
 \RedeclareSectionCommand[beforeskip=2\baselineskip]{subsection}
 \RedeclareSectionCommand[beforeskip=1\baselineskip,afterskip=1sp]{subsubsection}
-
-% add empty pages
-\RequirePackage{afterpage}
-\newcommand\blankpage{
-  \null
-  \thispagestyle{empty}
-\newpage}
 
 % graphics
 \RequirePackage{graphicx}
@@ -78,9 +71,12 @@
 % ----------------------------------------------------------------
 % custom commands and environments...
 % ----------------------------------------------------------------
-\newcommand{\BZ}[1][1]{\par\vskip #1\baselineskip}  % 1 Blindzeile
+\newcommand*{\BZ}[1][1]{\par\vskip #1\baselineskip}  % 1 Blindzeile
 
-% Text auf Seite von unten nach oben
+% add empty pages
+\newcommand*{\blankpage}{\null\thispagestyle{empty}\newpage}
+
+% fill page from bottom to top
 \newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
 
 % tabbing without sep
@@ -92,5 +88,5 @@
 
 % Struts for added vertical spacing in tabular environments
 % Insert struts directly in nominator/denominator/sub-/superscripts of fractions/sums etc.!
-\newcommand\TStrut{\rule{0pt}{2.6ex}}       % Top strut
-\newcommand\BStrut{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
+\newcommand*\TStrut{\rule{0pt}{2.6ex}}       % Top strut
+\newcommand*\BStrut{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
