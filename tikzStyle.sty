@@ -4,7 +4,7 @@
 % INFO     tikz macros etc.
 %          load tikz package in advance if necessary!
 %
-% DATE     08.03.2016
+% DATE     18.04.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -18,15 +18,15 @@
 %   \draw ([c]A) -- ([c]B);
 % \end{scope}
 % ------
-\tikzset{
-  c/.style={every coordinate/.try}
+\tikzset{%
+  c/.style={every coordinate/.try}%
 }
 
 % Kreisbogen um Punkt
 \tikzset{partial ellipse/.style args={#1:#2:#3}{insert path={+ (#1:#3) arc (#1:#2:#3)}}}
 
 % Rechter Winkel
-\newcommand*{\rechterWinkel}[3]{  % #1 = point, #2 = start angle, #3 = radius
+\newcommand*{\rechterWinkel}[3]{% #1 = point, #2 = start angle, #3 = radius
   \draw (#1) [partial ellipse=#2:#2+90:#3];
   \begin{scope}[every coordinate/.style={shift={(#2+45:#3/2)}}]
     \fill ([c]#1) circle (0.5pt);
@@ -34,7 +34,7 @@
 }
 
 % Mark lines as parallel
-\newcommand*{\markAsParallel}[3]{  % #1 = point, #2 = rotation angle, #3 = size
+\newcommand*{\markAsParallel}[3]{% #1 = point, #2 = rotation angle, #3 = size
   \begin{scope}[rotate=#2]
     \draw ($(#1)+(-#3,-#3/3)$) -- ($(#1)+(#3,-#3/3)$);
     \draw ($(#1)+(-#3,#3/3)$) -- ($(#1)+(#3,#3/3)$);

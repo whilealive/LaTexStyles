@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     17.04.2016
+% DATE     18.04.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -39,12 +39,12 @@
 
 % captions
 \RequirePackage{caption} 
-\captionsetup[figure]{
+\captionsetup[figure]{%
   name=Abb,
   font=small,
   format=plain,
   justification=raggedright,
-  singlelinecheck=false
+  singlelinecheck=false%
 }
 
 % tables
@@ -80,11 +80,13 @@
 \newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
 
 % tabbing without sep
-\newenvironment{nstabbing}
-{\setlength{\topsep}{0pt}%
+\newenvironment{nstabbing}{%
+  \setlength{\topsep}{0pt}%
   \setlength{\partopsep}{0pt}%
-\tabbing}
-{\endtabbing}
+  \tabbing
+}{%
+  \endtabbing
+}
 
 % Struts for added vertical spacing in tabular environments
 % Insert struts directly in nominator/denominator/sub-/superscripts of fractions/sums etc.!
