@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble for my math documents
 %
-% DATE     18.04.2016
+% DATE     19.04.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -45,9 +45,20 @@
 % frames
 \RequirePackage[framemethod=tikz]{mdframed}
 
+
 % ----------------------------------------------------------------
 % custom commands and environments...
 % ----------------------------------------------------------------
+% double underline for end results
+\newcommand*{\Result}[1]{\underline{\underline{#1}}}
+
+% basic sets
+\newcommand*{\N}{\mathbb{N}}
+\newcommand*{\Z}{\mathbb{Z}}
+\newcommand*{\Q}{\mathbb{Q}}
+\newcommand*{\R}{\mathbb{R}}
+\newcommand*{\C}{\mathbb{C}}
+
 % "environ"-package für verschachtelte Umgebungen innerhalb neuer Umgebung
 \RequirePackage{environ}
 
@@ -67,11 +78,22 @@
   \end{tikzpicture}%
 }
 
-% Umgebung "Aufgabe", mit und ohne Label für Lösungen.
+% Definiton mit grauem Rand
+\NewEnviron{FrameDef}
+{
+  \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=1pt,innerbottommargin=\topskip]
+    \begin{Def}
+      \BODY
+    \end{Def}
+  \end{mdframed}
+}
+
+% ----------------------------------------------------------------
+% all about Exercises...
 \newcounter{excounter}
 \renewcommand*{\theexcounter}{\arabic{excounter}}
 
-\newenvironment{AufgLsg}[1]{%
+\newenvironment{AufgLsg}[1]{% adds label for solution -> see LsgAufg
   \refstepcounter{excounter}%
   \label{#1}%
   \noindent\textbf{Aufgabe~\theexcounter$^{\bm{L}}$\enspace}%
@@ -79,15 +101,15 @@
   \par\addvspace{\baselineskip}%
 }
 
-\newenvironment{Aufg}[0]{%
+\newenvironment{Aufg}[0]{% normal
   \refstepcounter{excounter}%
   \noindent\textbf{Aufgabe~\theexcounter\enspace}%
 }{%
   \par\addvspace{\baselineskip}%
 }
 
-\newenvironment{Aufg*}[0]{%
-  \refstepcounter{excounter}
+\newenvironment{Aufg*}[0]{% difficult
+  \refstepcounter{excounter}%
   \noindent\textbf{Aufgabe~\theexcounter*\enspace}%
 }{%
   \par\addvspace{\baselineskip}%
@@ -99,17 +121,5 @@
 }{%
   \par\addvspace{.5\baselineskip}%
 }
-
-% Definiton mit grauem Rand
-\NewEnviron{FrameDef}
-{
-  \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=1pt,innerbottommargin=\topskip]
-    \begin{Def}
-      \BODY
-    \end{Def}
-  \end{mdframed}
-}
-
-% Doppelt unterstrichen
-\newcommand*{\Result}[1]{\underline{\underline{#1}}}
+% ----------------------------------------------------------------
 
