@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     18.04.2016
+% DATE     26.04.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -48,12 +48,12 @@
 }
 
 % tables
-\RequirePackage{array}
 \RequirePackage{multirow}
 \RequirePackage{booktabs}
-\RequirePackage{tabularx}
-\newcolumntype{Y}{>{\centering\arraybackslash}X}           % centered column type for tabularx
-\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}  % fixed width left-justified column
+\RequirePackage{tabularx}                                  % loads array package
+\newcolumntype{Z}{>{\centering\arraybackslash}X}           % tabularx: centered column type for tabularx
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}         % tabularx: left-justified column type for tabularx
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}  % tabularx: fixed width left-justified column
 
 % lists
 \RequirePackage[inline]{enumitem}
