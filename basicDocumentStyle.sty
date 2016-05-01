@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     26.04.2016
+% DATE     28.04.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -78,15 +78,6 @@
 
 % fill page from bottom to top
 \newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
-
-% tabbing without sep
-\newenvironment{nstabbing}{%
-  \setlength{\topsep}{0pt}%
-  \setlength{\partopsep}{0pt}%
-  \tabbing
-}{%
-  \endtabbing
-}
 
 % Struts for added vertical spacing in tabular environments
 % Insert struts directly in nominator/denominator/sub-/superscripts of fractions/sums etc.!
