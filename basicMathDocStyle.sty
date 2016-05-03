@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble for my math documents
 %
-% DATE     29.04.2016
+% DATE     03.05.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -18,21 +18,22 @@
 \RequirePackage{amsthm}
 \RequirePackage{bm}
 
-% various math options
-\DeclarePairedDelimiter\abs{\lvert}{\rvert}  % mathtools: abs*{...} command
+% amsmath options
 \allowdisplaybreaks
 
-% math theorems
-\newtheoremstyle{MyStyle}%
-  {\baselineskip}	 % space above
-  {\baselineskip}	 % space below
-  {}							 % body font
-  {}							 % indent amount
-  {\bfseries}			 % Theorem head font
-  {.}							 % punctuation after theorem head
-  {.5em}					 % space after theorem head
-  {\thmname{#1}}	 % theorem head spec
+% mathtools stuff
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}  % mathtools: abs*{...} command
 
+% math theorems
+% {#1}: space above
+% {#2}: space below
+% {#3}: body font
+% {#4}: indent amount
+% {#5}: Theorem head font
+% {#6}: punctuation after theorem head
+% {#7}: space after theorem head
+% {#8}: theorem head spec
+\newtheoremstyle{MyStyle}{\baselineskip}{\baselineskip}{}{}{\bfseries}{.}{.5em}{\thmname{#1}}
 \theoremstyle{MyStyle}
 \newtheorem{Def}{Definition}
 \newtheorem{Bsp}{Beispiel}
@@ -51,6 +52,7 @@
 % ----------------------------------------------------------------
 % double underline for end results
 \newcommand*{\Result}[1]{\underline{\underline{#1}}}
+\newcommand*\bigfrac{\genfrac{}{}{1pt}{0}}   % nested fractions
 
 % sets and constants
 \newcommand*{\N}{\mathbb{N}}
@@ -60,6 +62,9 @@
 \newcommand*{\C}{\mathbb{C}}
 \newcommand*{\euler}{e}
 \newcommand*{\complex}{i}
+\newcommand*{\ggT}{\mathrm{ggT}}
+\newcommand*{\kgV}{\mathrm{kgV}}
+
 
 % "environ"-package für verschachtelte Umgebungen innerhalb neuer Umgebung
 \RequirePackage{environ}
