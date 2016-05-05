@@ -3,24 +3,23 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     28.04.2016
+% DATE     05.05.2016
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{basicDocumentStyle}
 
+% fonts
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8x]{inputenc}
 \RequirePackage[ngerman]{babel}
-\setlength{\parindent}{0pt}
-
-% fonts
 \RequirePackage{lmodern}
 
-% additional symbols etc.
+% global settings
+\setlength{\parindent}{0pt}
+
+% typography, symbols etc.
 \RequirePackage[babel=true]{microtype}
-\RequirePackage{siunitx}
-\sisetup{per-mode=symbol}
 \RequirePackage{eurosym}
 \RequirePackage{url}
 
@@ -34,11 +33,10 @@
 \RedeclareSectionCommand[beforeskip=2\baselineskip]{subsection}
 \RedeclareSectionCommand[beforeskip=1\baselineskip,afterskip=1sp]{subsubsection}
 
-% graphics
+% floats, figures, captions...
 \RequirePackage{graphicx}
-
-% captions
-\RequirePackage{caption} 
+\RequirePackage{float}
+\RequirePackage{caption}
 \captionsetup[figure]{%
   name=Abb,
   font=small,
@@ -64,9 +62,6 @@
 \setlist[enumerateAlph*,1]{label=\alph*),itemjoin=\quad}
 \RequirePackage{multicol} 
 \setlength\multicolsep{0pt}
-
-% floats, figures, boxes...
-\RequirePackage{float}
 
 % ----------------------------------------------------------------
 % custom commands and environments...

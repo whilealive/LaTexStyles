@@ -5,9 +5,10 @@
 %          Vorlage unter:
 %          ~/Documents/Studium/Lehramt/Fachdidaktik_III/Klassische-Probleme-der-Antike/
 %
-% DATE     17.04.2016
+% DATE     03.05.2016
 % OWNER    Bischofberger
 % ==================================================================
+% NOTE: Darf basicDocumentStyle nicht laden, wegen enumitem-beamer Konflikt.
 
 \ProvidesClass{myBeamer}
 \NeedsTeXFormat{LaTeX2e}
@@ -38,18 +39,24 @@
 \RequirePackage{lmodern}
 
 % typography
-\RequirePackage{microtype}
-\RequirePackage{nicefrac}
+\RequirePackage[babel=true]{microtype}
 \RequirePackage{siunitx}
+\sisetup{per-mode=symbol}
 \RequirePackage{eurosym}
+\RequirePackage{url}
 
 % math packages
-\RequirePackage{basicMathDocStyle}
+\RequirePackage{mathtools}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{bm}
 
 % tables, lists...
 % don't load enumitem for beamer!
 \RequirePackage{array}
 \RequirePackage{tabularx}
+\RequirePackage{booktabs}
 
 % floats, figures, boxes...
+\RequirePackage{graphicx}
 \RequirePackage{float}
