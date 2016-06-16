@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble for my math documents
 %
-% DATE     05.05.2016
+% DATE     16.06.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -112,16 +112,16 @@
   \par\addvspace{\baselineskip}%
 }
 
-\newenvironment{Aufg}[0]{% normal
-  \refstepcounter{excounter}%
-  \noindent\textbf{Aufgabe~\theexcounter\enspace}%
+\newenvironment{Aufg}[1][\theexcounter]{% normal
+  \ifx\theexcounter#1\refstepcounter{excounter}\fi%
+  \noindent\textbf{Aufgabe~#1\enspace}%
 }{%
   \par\addvspace{\baselineskip}%
 }
 
-\newenvironment{Aufg*}[0]{% difficult
-  \refstepcounter{excounter}%
-  \noindent\textbf{Aufgabe~\theexcounter*\enspace}%
+\newenvironment{Aufg*}[1][\theexcounter]{% difficult
+  \ifx\theexcounter#1\refstepcounter{excounter}\fi%
+  \noindent\textbf{Aufgabe~#1*\enspace}%
 }{%
   \par\addvspace{\baselineskip}%
 }
