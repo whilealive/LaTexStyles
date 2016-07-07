@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble for my math documents
 %
-% DATE     16.06.2016
+% DATE     04.07.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -44,7 +44,6 @@
 \newtheorem{Bem}{Bemerkung}
 
 % drawings
-\RequirePackage{tikz}
 \RequirePackage{tikzStyle}
 
 % frames
@@ -77,6 +76,7 @@
 % - Berechnet optimale Häuschengrösse (+- 4mm) und Anzahl Häuschen, 
 %   um \linewidth aufzufüllen.
 % - Argument: Anzahl Reihen (= vertikale Höhe)
+% TODO: auffüllen bis Seitenende
 \newcommand*{\Notes}[1]{%
   \BZ[.5]%
   \begin{tikzpicture}[scale=1]
