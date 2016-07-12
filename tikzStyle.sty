@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     tikz macros etc.
 %
-% DATE     07.07.2016
+% DATE     12.07.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -28,13 +28,6 @@
 \newcommand*{\RechterWinkel}[3]{% #1 = three points B--A--C, #2 = radius, #3 = style
   \draw[#3] pic[pic text=$\cdot$, draw, angle radius=#2, angle eccentricity=.5] {angle=#1};
 }
-%\newcommand*{\rechterWinkel}[3]{% #1 = point, #2 = start angle, #3 = radius
-%  \draw (#1) [partial ellipse=#2:#2+90:#3];
-%  \begin{scope}[every coordinate/.style={shift={(#2+45:#3/4)}}]
-%    \fill[shift only] ([c]#1) circle (1pt);
-%  \end{scope}
-%}
-
 
 % Mark lines as parallel
 % use as: \markAsParallel{P}{90}{1.5mm};
@@ -48,5 +41,4 @@
 % Point that won't get scaled
 \newcommand*{\Point}[3]{% #1 = coordinate, #2 = node text, #3 = node position
   \draw[fill] (#1) node[circle,fill,inner sep=1.8pt] {} node[#3] {#2};
-  %\draw[fill] (#1) coordinate(#2) node[circle,fill,inner sep=1pt] {} node[#3] {$#2$};
 }
