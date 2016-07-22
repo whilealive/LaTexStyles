@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     05.05.2016
+% DATE     22.07.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -78,3 +78,7 @@
 % Insert struts directly in nominator/denominator/sub-/superscripts of fractions/sums etc.!
 \newcommand*\TStrut{\rule{0pt}{2.6ex}}       % Top strut
 \newcommand*\BStrut{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
+
+% unit conversion: \convertto{mm}{25}
+% % pt, mm, cm, ex, em, bp, dd, pc, in
+\def\convertto#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1}
