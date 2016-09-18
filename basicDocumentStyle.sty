@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     22.07.2016
+% DATE     18.09.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -32,6 +32,8 @@
 \RedeclareSectionCommand[beforeskip=2\baselineskip,afterskip=\baselineskip]{section}
 \RedeclareSectionCommand[beforeskip=2\baselineskip]{subsection}
 \RedeclareSectionCommand[beforeskip=1\baselineskip,afterskip=1sp]{subsubsection}
+\let\@addmarginORIG\@addmargin % no vertical separation if addmargin is used
+\renewcommand*\@addmargin{\vspace{-\bigskipamount}\@addmarginORIG}
 
 % floats, figures, captions...
 \RequirePackage{graphicx}
