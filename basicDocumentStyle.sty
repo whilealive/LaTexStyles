@@ -54,7 +54,7 @@
 \newcolumntype{Z}{>{\centering\arraybackslash}X}           % tabularx: centered column type for tabularx
 \newcolumntype{L}{>{\raggedright\arraybackslash}X}         % tabularx: left-justified column type for tabularx
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}  % tabularx: fixed width left-justified column
-
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 % lists
 \RequirePackage[inline]{enumitem}
 \setlist{leftmargin=*,nosep}            % global: no left indent, no vertical sep. for any list
