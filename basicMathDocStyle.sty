@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble for my math documents
 %
-% DATE     19.07.2016
+% DATE     14.10.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -49,6 +49,9 @@
 % frames
 \RequirePackage[framemethod=tikz]{mdframed}
 
+% multicolumn horizontally numbered (loads environ)
+\RequirePackage{tasks}
+
 
 % ----------------------------------------------------------------
 % custom commands and environments...
@@ -68,10 +71,6 @@
 \newcommand*{\GGT}{\mathrm{ggT}}
 \newcommand*{\KGV}{\mathrm{kgV}}
 \newcommand*{\D}[1]{\mathrm{d}#1}  % dx
-
-
-% "environ"-package für verschachtelte Umgebungen innerhalb neuer Umgebung
-\RequirePackage{environ}
 
 % Notizpapier.
 % - Berechnet optimale Häuschengrösse (+- 4mm) und Anzahl Häuschen, 
