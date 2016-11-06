@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble for my math documents
 %
-% DATE     14.10.2016
+% DATE     06.11.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -49,8 +49,15 @@
 % frames
 \RequirePackage[framemethod=tikz]{mdframed}
 
-% multicolumn horizontally numbered (loads environ)
+% exercise enumerations (loads environ)
 \RequirePackage{tasks}
+
+% alphanumeric enumerations for exercises
+% -> deprecated (to be replaced by tasks)!!!
+%\newlist{enumerateAlph}{enumerate}{1}   % enumerate with label=\alph) and (really) no left indent
+%\newlist{enumerateAlph*}{enumerate*}{1} 
+%\setlist[enumerateAlph,1]{label=\alph*),labelindent=-0.3em}
+%\setlist[enumerateAlph*,1]{label=\alph*),itemjoin=\quad}
 
 
 % ----------------------------------------------------------------

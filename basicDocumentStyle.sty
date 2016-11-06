@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble für alle LaTex Dokumente
 %
-% DATE     18.09.2016
+% DATE     03.11.2016
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -57,21 +57,14 @@
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 % lists
 \RequirePackage[inline]{enumitem}
-\setlist{leftmargin=*,nosep}            % global: no left indent, no vertical sep. for any list
-\newlist{enumerateAlph}{enumerate}{1}   % enumerate with label=\alph) and (really) no left indent
-\newlist{enumerateAlph*}{enumerate*}{1} 
-\setlist[enumerateAlph,1]{label=\alph*),labelindent=-0.3em}
-\setlist[enumerateAlph*,1]{label=\alph*),itemjoin=\quad}
-\RequirePackage{multicol} 
+\setlist{leftmargin=*,nosep}  % global: no left indent, no vertical sep. for any list
+\RequirePackage{multicol}
 \setlength\multicolsep{0pt}
 
 % ----------------------------------------------------------------
 % custom commands and environments...
 % ----------------------------------------------------------------
 \newcommand*{\BZ}[1][1]{\par\vskip #1\baselineskip}  % 1 Blindzeile
-
-% add empty pages
-\newcommand*{\blankpage}{\null\thispagestyle{empty}\newpage}
 
 % fill page from bottom to top
 \newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
