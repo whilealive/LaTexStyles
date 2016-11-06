@@ -3,14 +3,14 @@
 % MACHINE  all
 % INFO     tikz macros etc.
 %
-% DATE     02.10.2016
+% DATE     06.11.2016
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{tikzStyle}
 
 \RequirePackage{tikz}
-\usetikzlibrary{calc,angles,intersections}
+\usetikzlibrary{calc,angles,intersections,arrows.meta}
 
 % Shift previously defined coordinates. Usage:
 % --------------------------------------------
@@ -33,3 +33,6 @@
 \newcommand*{\Point}[3]{% #1 = coordinate, #2 = node text, #3 = node position
   \draw[fill] (#1) node[circle,fill,inner sep=1pt] {} node[#3] {#2};
 }
+
+% nicer arrow tip default
+\tikzset{>={Triangle[angle=45:1pt 10]}}
