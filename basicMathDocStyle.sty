@@ -52,14 +52,6 @@
 % exercise enumerations (loads environ)
 \RequirePackage{tasks}
 
-% alphanumeric enumerations for exercises
-% -> deprecated (to be replaced by tasks)!!!
-%\newlist{enumerateAlph}{enumerate}{1}   % enumerate with label=\alph) and (really) no left indent
-%\newlist{enumerateAlph*}{enumerate*}{1} 
-%\setlist[enumerateAlph,1]{label=\alph*),labelindent=-0.3em}
-%\setlist[enumerateAlph*,1]{label=\alph*),itemjoin=\quad}
-
-
 % ----------------------------------------------------------------
 % custom commands and environments...
 % ----------------------------------------------------------------
@@ -79,20 +71,32 @@
 \newcommand*{\KGV}{\mathrm{kgV}}
 \newcommand*{\D}[1]{\mathrm{d}#1}  % dx
 
-% Notizpapier.
-% - Berechnet optimale Häuschengrösse (+- 4mm) und Anzahl Häuschen, 
-%   um \linewidth aufzufüllen.
-% - Argument: Anzahl Reihen (= vertikale Höhe)
-% TODO: auffüllen bis Seitenende
-\newcommand*{\Notes}[1]{%
+% Notes
+\newcommand*{\NotesCalc}{% helper macro
+  \pgfmathparse{\linewidth - \pgflinewidth}%
+  \xdef\myLineWidth{\pgfmathresult}% correct width without line caps
+  \pgfmathparse{\myLineWidth / int(\myLineWidth/4mm)}%
+  \xdef\sizeOfSquares{\pgfmathresult}% +- 4mm square size
+}
+\newcommand*{\Notes}[1]{% arg: number of rows
   \BZ[.5]%
   \begin{tikzpicture}[scale=1]
-    \pgfmathparse{\linewidth - \pgflinewidth}%
-    \xdef\myLineWidth{\pgfmathresult}% correct width without line caps
-    \pgfmathparse{\myLineWidth / int(\myLineWidth/4mm)}%
-    \xdef\sizeOfSquares{\pgfmathresult}% +- 4mm square size
+    \NotesCalc
     \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin] 
       (0,0) grid (\myLineWidth pt, {#1 * \sizeOfSquares pt});
+  \end{tikzpicture}%
+}
+% -> http://tex.stackexchange.com/questions/14512/how-to-define-a-figure-size-so-that-it-consumes-the-rest-of-a-page
+\newcommand\measurepage{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
+% Fill notes paper until end of page
+\newcommand*{\FillNotes}{%
+  \BZ[.5]%
+  \begin{tikzpicture}
+    \NotesCalc
+    \pgfmathparse{int(\measurepage/\sizeOfSquares)}
+    \xdef\numberOfRows{\pgfmathresult}
+    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]
+      (0,0) grid (\myLineWidth pt, {\numberOfRows * \sizeOfSquares pt});
   \end{tikzpicture}%
 }
 
