@@ -88,7 +88,7 @@
   \end{tikzpicture}%
 }
 % -> http://tex.stackexchange.com/questions/14512/how-to-define-a-figure-size-so-that-it-consumes-the-rest-of-a-page
-\newcommand\measurepage{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
+\newcommand*\measurepage{\dimexpr\textheight-\pagetotal-\baselineskip\relax}
 % Fill notes paper until end of page
 \newcommand*{\FillNotes}{%
   \BZ[.5]%
