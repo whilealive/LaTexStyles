@@ -107,11 +107,12 @@
 % definition frame
 \NewEnviron{FrameDef}
 {
-  \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=2pt,innerbottommargin=0pt]
+  \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=1pt,innerbottommargin=0pt]
     \begin{Def}
       \BODY
     \end{Def}
   \end{mdframed}
+  \penalty12345
 }
 
 
