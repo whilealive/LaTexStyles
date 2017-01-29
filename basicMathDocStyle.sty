@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble for my math documents
 %
-% DATE     28.12.2016
+% DATE     29.01.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -70,9 +70,11 @@
 \newcommand*{\C}{\mathbb{C}}
 \newcommand*{\Euler}{e}
 \newcommand*{\Complex}{i}
-\newcommand*{\GGT}{\mathrm{ggT}}
-\newcommand*{\KGV}{\mathrm{kgV}}
-\newcommand*{\D}[1]{\mathrm{d}#1}  % dx
+\newcommand*{\D}[1]{\mathrm{d}#1}  % dx, dy...
+\DeclareMathOperator{\GGT}{ggT}
+\DeclareMathOperator{\KGV}{kgV}
+\DeclareMathOperator{\Mean}{E}  % mean (stochastics)
+\DeclareMathOperator{\Var}{Var} % variance (stochastics)
 
 % Theorems
 \newenvironment{Bsp}{\SpaceAbove\BZ\noindent\textbf{Beispiel\enspace}}{\SpaceBelow}
@@ -90,6 +92,7 @@
 }
 
 % Fill notes paper until end of page
+% FIXME: subtract footnote height
 \newcommand*{\FillNotes}{%
   \BZ[.5]%
   \begin{tikzpicture}
