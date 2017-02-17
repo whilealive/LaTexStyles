@@ -1,0 +1,45 @@
+% ==================================================================
+% FILE     myNotes.sty
+% MACHINE  all
+% INFO     Notes...
+%          requires tikz package
+%
+% DATE     16.02.2017
+% OWNER    Bischofberger
+% ==================================================================
+
+\ProvidesPackage{myNotes}
+
+% helper macro
+\newcommand*{\NotesCalc}{%
+  \pgfmathparse{\linewidth - \pgflinewidth}%
+  \xdef\myLineWidth{\pgfmathresult}% correct width without line caps
+  \pgfmathparse{\myLineWidth / int(\myLineWidth/4mm)}%
+  \xdef\sizeOfSquares{\pgfmathresult}% +- 4mm square size
+}
+
+% http://tex.stackexchange.com/questions/14512/how-to-define-a-figure-size-so-that-it-consumes-the-rest-of-a-page
+\newcommand*\measurepage{\dimexpr\textheight-\pagetotal-\baselineskip\relax}
+
+% Notes
+\newcommand*{\Notes}[1]{% arg: number of rows
+  \BZ[.5]%
+  \begin{tikzpicture}[scale=1]
+    \NotesCalc
+    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin] 
+      (0,0) grid (\myLineWidth pt, {#1 * \sizeOfSquares pt});
+  \end{tikzpicture}%
+}
+
+% Fill notes paper until end of page
+\newcommand*{\FillNotes}{%
+  \BZ[.5]%
+  \begin{tikzpicture}
+    \NotesCalc
+    \pgfmathparse{int(\measurepage/\sizeOfSquares)}
+    \xdef\numberOfRows{\pgfmathresult}
+    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]
+      (0,0) grid (\myLineWidth pt, {\numberOfRows * \sizeOfSquares pt});
+  \end{tikzpicture}%
+}
+

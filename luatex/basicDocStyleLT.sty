@@ -1,0 +1,171 @@
+% ==================================================================
+% FILE     basicDocStyleLT.sty
+% MACHINE  all
+% INFO     Preamble für alle Lua(La)TeX Dokumente
+%          Font: Lucida Bright (TUG)
+%
+% DATE     16.02.2017
+% OWNER    Bischofberger
+% ==================================================================
+% TODO: get rid of KOMA script
+
+\ProvidesPackage{basicDocStyleLT}
+
+% fonts
+\RequirePackage{amsmath}       % to be loaded before unicode-math, will load fontspec 
+%\RequirePackage{mathtools}
+%\RequirePackage{amssymb}
+\RequirePackage{unicode-math}    % support opentype math fonts
+\RequirePackage{lucidaBrightOT}  % set fonts, kerning etc.
+
+% language
+\RequirePackage[ngerman]{babel}
+
+% global settings
+\setlength{\parindent}{0pt}
+\allowdisplaybreaks
+
+% typography, symbols etc.
+\RequirePackage[babel=true]{microtype}
+\RequirePackage{url}
+
+% header/footer (KOMA-Script)
+\RequirePackage[headsepline,plainheadsepline]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\setkomafont{pageheadfoot}{\normalfont}
+
+% various KOMA script stuff
+\setkomafont{disposition}{\normalfont}
+\RedeclareSectionCommand[beforeskip=2\baselineskip,afterskip=\baselineskip]{section}
+\RedeclareSectionCommand[beforeskip=2\baselineskip]{subsection}
+\RedeclareSectionCommand[beforeskip=1\baselineskip,afterskip=1sp]{subsubsection}
+
+% floats, figures, captions...
+\RequirePackage{graphicx}
+\RequirePackage{float}
+\RequirePackage{caption}
+\captionsetup[figure]{%
+  name=Abb,
+  font=small,
+  format=plain,
+  justification=raggedright,
+  singlelinecheck=false%
+}
+
+% tables
+\RequirePackage{multirow}
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}                                  % loads array package
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}  % tabular: fixed width left-justified column
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}    % tabular: fixed width centered column
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}         % tabularx: left-justified column type for tabularx
+\newcolumntype{Z}{>{\centering\arraybackslash}X}           % tabularx: centered column type for tabularx
+
+% lists
+\RequirePackage[inline]{enumitem}
+\setlist{leftmargin=*,nosep}  % global: no left indent, no vertical sep. for any list
+\RequirePackage{multicol}
+\setlength\multicolsep{0pt}
+
+% units
+\RequirePackage{siunitx}
+\sisetup{per-mode=symbol}
+
+% frames
+\RequirePackage{mdframed}
+
+% exercise enumerations (also loads environ)
+\RequirePackage{tasks}
+\NewTasks[label-width={1.2em},item-indent={1.5333em}]{Tasks}  % tasks with no left indent
+
+
+% ----------------------------------------------------------------
+% local helper makros
+% ----------------------------------------------------------------
+% http://tex.stackexchange.com/questions/204699/smaller-vertical-space-between-repeated-environments
+\newcommand*\SpaceAbove{\ifnum\lastpenalty=12345\vskip-\baselineskip\penalty0\fi}
+\newcommand*\SpaceBelow{\par\addvspace{\baselineskip}\penalty12345}
+
+
+% ----------------------------------------------------------------
+% custom commands and environments...
+% ----------------------------------------------------------------
+\newcommand*{\BZ}[1][1]{\par\vskip #1\baselineskip}  % 1 Blindzeile
+
+% fill page from bottom to top
+\newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
+
+% Struts for added vertical spacing in tabular environments
+% Insert struts directly in nominator/denominator/sub-/superscripts of fractions/sums etc.!
+\newcommand*\TStrut{\rule{0pt}{2.6ex}}       % Top strut
+\newcommand*\BStrut{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
+
+% unit conversion: \convertto{mm}{25}
+% % pt, mm, cm, ex, em, bp, dd, pc, in
+\def\convertto#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1}
+
+% double underline for end results
+\newcommand*{\Result}[1]{\underline{\underline{#1}}}
+\newcommand*\bigfrac{\genfrac{}{}{1pt}{0}}   % nested fractions
+
+% sets and constants
+\newcommand*{\N}{\mathbb{N}}
+\newcommand*{\Z}{\mathbb{Z}}
+\newcommand*{\Q}{\mathbb{Q}}
+\newcommand*{\R}{\mathbb{R}}
+\newcommand*{\C}{\mathbb{C}}
+\newcommand*{\Euler}{e}
+\newcommand*{\Complex}{i}
+\newcommand*{\D}[1]{\mathrm{d}#1}  % dx, dy...
+\DeclareMathOperator{\GGT}{ggT}
+\DeclareMathOperator{\KGV}{kgV}
+\DeclareMathOperator{\Mean}{E}  % mean (stochastics)
+\DeclareMathOperator{\Var}{Var} % variance (stochastics)
+
+% Theorems
+\newenvironment{Bsp}{\SpaceAbove\BZ\noindent\textbf{Beispiel\enspace}}{\SpaceBelow}
+\newenvironment{Def}{\SpaceAbove\BZ\noindent\textbf{Definition\enspace}}{\SpaceBelow}
+\newenvironment{Bem}{\SpaceAbove\BZ\noindent\textbf{Bemerkung\enspace}}{\SpaceBelow}
+
+% definition frame
+\NewEnviron{FrameDef}
+{
+  \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=1pt,innerbottommargin=0pt]
+    \begin{Def}
+      \BODY
+    \end{Def}
+  \end{mdframed}
+  \penalty12345
+}
+
+
+% ----------------------------------------------------------------
+% all about Exercises...
+% ----------------------------------------------------------------
+\newcounter{excounter}
+\renewcommand*{\theexcounter}{\arabic{excounter}}
+
+\newenvironment{AufgLsg}[1]{% adds label for solution -> see LsgAufg
+  \refstepcounter{excounter}%
+  \SpaceAbove%
+  \label{#1}%
+  \BZ\noindent\textbf{Aufgabe~\theexcounter$^{\bm{L}}$\enspace}%
+}{\SpaceBelow}
+
+\newenvironment{Aufg}[1][\theexcounter]{% normal
+  \ifx\theexcounter#1\refstepcounter{excounter}\fi%
+  \SpaceAbove%
+  \BZ\noindent\textbf{Aufgabe~#1\enspace}%
+}{\SpaceBelow}
+
+\newenvironment{Aufg*}[1][\theexcounter]{% difficult
+  \ifx\theexcounter#1\refstepcounter{excounter}\fi%
+  \SpaceAbove%
+  \BZ\noindent\textbf{Aufgabe~#1*\enspace}%
+}{\SpaceBelow}
+
+% Lösung einer einzelnen Aufgabe.
+\newenvironment{LsgAufg}[1]{%
+  \textbf{Aufg. \ref{#1} }%
+}{\par\addvspace{.5\baselineskip}}
+

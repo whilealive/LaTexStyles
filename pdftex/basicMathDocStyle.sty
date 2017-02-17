@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Preamble for my math documents
 %
-% DATE     15.02.2017
+% DATE     16.02.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -25,11 +25,8 @@
 \allowdisplaybreaks
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 
-% drawings
-\RequirePackage{tikzStyle}
-
 % frames
-\RequirePackage[framemethod=tikz]{mdframed}
+\RequirePackage{mdframed}
 
 % exercise enumerations (also loads environ)
 \RequirePackage{tasks}
@@ -39,16 +36,6 @@
 % ----------------------------------------------------------------
 % local helper makros
 % ----------------------------------------------------------------
-\newcommand*{\NotesCalc}{%
-  \pgfmathparse{\linewidth - \pgflinewidth}%
-  \xdef\myLineWidth{\pgfmathresult}% correct width without line caps
-  \pgfmathparse{\myLineWidth / int(\myLineWidth/4mm)}%
-  \xdef\sizeOfSquares{\pgfmathresult}% +- 4mm square size
-}
-
-% http://tex.stackexchange.com/questions/14512/how-to-define-a-figure-size-so-that-it-consumes-the-rest-of-a-page
-\newcommand*\measurepage{\dimexpr\textheight-\pagetotal-\baselineskip\relax}
-
 % http://tex.stackexchange.com/questions/204699/smaller-vertical-space-between-repeated-environments
 \newcommand*\SpaceAbove{\ifnum\lastpenalty=12345\vskip-\baselineskip\penalty0\fi}
 \newcommand*\SpaceBelow{\par\addvspace{\baselineskip}\penalty12345}
@@ -79,29 +66,6 @@
 \newenvironment{Bsp}{\SpaceAbove\BZ\noindent\textbf{Beispiel\enspace}}{\SpaceBelow}
 \newenvironment{Def}{\SpaceAbove\BZ\noindent\textbf{Definition\enspace}}{\SpaceBelow}
 \newenvironment{Bem}{\SpaceAbove\BZ\noindent\textbf{Bemerkung\enspace}}{\SpaceBelow}
-
-% Notes
-\newcommand*{\Notes}[1]{% arg: number of rows
-  \BZ[.5]%
-  \begin{tikzpicture}[scale=1]
-    \NotesCalc
-    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin] 
-      (0,0) grid (\myLineWidth pt, {#1 * \sizeOfSquares pt});
-  \end{tikzpicture}%
-}
-
-% Fill notes paper until end of page
-% FIXME: subtract footnote height
-\newcommand*{\FillNotes}{%
-  \BZ[.5]%
-  \begin{tikzpicture}
-    \NotesCalc
-    \pgfmathparse{int(\measurepage/\sizeOfSquares)}
-    \xdef\numberOfRows{\pgfmathresult}
-    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]
-      (0,0) grid (\myLineWidth pt, {\numberOfRows * \sizeOfSquares pt});
-  \end{tikzpicture}%
-}
 
 % definition frame
 \NewEnviron{FrameDef}
