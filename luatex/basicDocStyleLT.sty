@@ -4,18 +4,17 @@
 % INFO     Preamble für alle Lua(La)TeX Dokumente
 %          Font: Lucida Bright (TUG)
 %
-% DATE     16.02.2017
+% DATE     22.02.2017
 % OWNER    Bischofberger
 % ==================================================================
-% TODO: get rid of KOMA script
 
 \ProvidesPackage{basicDocStyleLT}
 
 % fonts
-\RequirePackage{amsmath}       % to be loaded before unicode-math, will load fontspec 
-%\RequirePackage{mathtools}
+%\RequirePackage{amsmath}
+\RequirePackage{mathtools}       % to be loaded before unicode-math, will load fontspec
 %\RequirePackage{amssymb}
-\RequirePackage{unicode-math}    % support opentype math fonts
+\RequirePackage{unicode-math}    % support opentype math fonts (load after mathtools!)
 \RequirePackage{lucidaBrightOT}  % set fonts, kerning etc.
 
 % language
@@ -107,6 +106,9 @@
 % double underline for end results
 \newcommand*{\Result}[1]{\underline{\underline{#1}}}
 \newcommand*\bigfrac{\genfrac{}{}{1pt}{0}}   % nested fractions
+
+% absolute value
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
 
 % sets and constants
 \newcommand*{\N}{\mathbb{N}}
