@@ -4,12 +4,15 @@
 % INFO     Lucida Bright package for Lua(La)TeX
 %          Font: Lucida Bright (TUG)
 %
-% DATE     17.02.2017
+% DATE     25.02.2017
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{lucidaBrightOT}
 
+% kerning tables:
+% Note: math fonts have quite different kerning,
+%       therefore we must have to seperate tables
 \directlua {
   fonts.handlers.otf.addfeature {
     name = "lucidakern",
@@ -104,18 +107,9 @@
                   ["o"] = -20,
                   ["u"] = -20,
                   ["ü"] = -20,
-                  ["y"] = -10 }
-      }
-    }
-  }
-
-  fonts.handlers.otf.addfeature {
-    name = "lucidamathkern",
-    {
-      type = "kern",
-      data = {
+                  ["y"] = -10 },
         ["1"] = { ["0"] = -20,
-                  ["1"] = -40,
+                  ["1"] = -30,
                   ["2"] = -20,
                   ["3"] = -20,
                   ["4"] = -20,
@@ -132,7 +126,35 @@
         ["7"] = { ["1"] = -20, ["1"] = -20 },
         ["8"] = { ["1"] = -20, ["7"] = -20 },
         ["9"] = { ["1"] = -20, ["7"] = -20 },
-        ["O"] = { ["1"] = -25, ["7"] = -20 },
+        ["O"] = { ["1"] = -35, ["7"] = -20 }
+      }
+    }
+  }
+
+  fonts.handlers.otf.addfeature {
+    name = "lucidamathkern",
+    {
+      type = "kern",
+      data = {
+        ["1"] = { ["0"] = -80,
+                  ["1"] = -80,
+                  ["2"] = -40,
+                  ["3"] = -40,
+                  ["4"] = -40,
+                  ["5"] = -40,
+                  ["6"] = -40,
+                  ["7"] = -80,
+                  ["8"] = -40,
+                  ["9"] = -40 },
+        ["2"] = { ["1"] = -40, ["7"] = -40 },
+        ["3"] = { ["1"] = -40, ["7"] = -40 },
+        ["4"] = { ["1"] = -40, ["7"] = -40 },
+        ["5"] = { ["1"] = -40, ["7"] = -40 },
+        ["6"] = { ["1"] = -40, ["7"] = -40 },
+        ["7"] = { ["1"] = -40, ["1"] = -40 },
+        ["8"] = { ["1"] = -40, ["7"] = -40 },
+        ["9"] = { ["1"] = -40, ["7"] = -40 },
+        ["O"] = { ["1"] = -60, ["7"] = -40 }
       }
     }
   }
@@ -144,7 +166,7 @@
   ItalicFont=LucidaBrightOT-Italic.otf,
   BoldFont=LucidaBrightOT-Demi.otf,
   BoldItalicFont=LucidaBrightOT-DemiItalic.otf,
-  RawFeature={+lucidakern,+lucidamathkern},
+  RawFeature={+lucidakern},
   Ligatures=TeX]
 \setsansfont{LucidaSansOT.otf}[%
   ItalicFont=LucidaSansOT-Italic.otf,
@@ -159,8 +181,8 @@
 
 % set the math fonts (unicode-math)
 % no kerning support yet...
-\setmathfont{LucidaBrightMathOT.otf}
-\setmathfont{LucidaBrightMathOT-Demi.otf}[version=bold]
+\setmathfont{LucidaBrightMathOT.otf}[RawFeature={+lucidamathkern}]
+\setmathfont{LucidaBrightMathOT-Demi.otf}[version=bold,RawFeature={+lucidamathkern}]
 
 % lucida needs a bit extra line stretch
 \renewcommand{\baselinestretch}{1.2} 
