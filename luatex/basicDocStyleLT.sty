@@ -4,9 +4,12 @@
 % INFO     Preamble für alle Lua(La)TeX Dokumente
 %          Font: Lucida Bright (TUG)
 %
-% DATE     22.02.2017
+% DATE     05.03.2017
 % OWNER    Bischofberger
 % ==================================================================
+% TODO: 
+% - rewrite "\SpaceAbove", "\SpaceBelow" to make it more usable
+% - replace KOMA-Script: Titles, Headings, addmargin
 
 \ProvidesPackage{basicDocStyleLT}
 
@@ -82,6 +85,12 @@
 % local helper makros
 % ----------------------------------------------------------------
 % http://tex.stackexchange.com/questions/204699/smaller-vertical-space-between-repeated-environments
+% TODO: make more usable
+%\newcommand*{\SkipPenalty}{12345}
+%\newcommand*{\FlagSet}{\penalty\SkipPenalty}
+%\newcommand*{\FlagReset}{\penalty0}
+%\newcommand*{\SpaceAbove}{\ifnum\lastpenalty=\SkipPenalty\vskip-\baselineskip\FlagReset\fi}
+%\newcommand*{\SpaceBelow}{\par\addvspace{\baselineskip}\penalty\FlagSet}
 \newcommand*\SpaceAbove{\ifnum\lastpenalty=12345\vskip-\baselineskip\penalty0\fi}
 \newcommand*\SpaceBelow{\par\addvspace{\baselineskip}\penalty12345}
 
@@ -101,7 +110,7 @@
 
 % unit conversion: \convertto{mm}{25}
 % % pt, mm, cm, ex, em, bp, dd, pc, in
-\def\convertto#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1}
+\def\convertto#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1\relax#1}
 
 % double underline for end results
 \newcommand*{\Result}[1]{\underline{\underline{#1}}}
