@@ -14,9 +14,7 @@
 \ProvidesPackage{basicDocStyleLT}
 
 % fonts
-%\RequirePackage{amsmath}
 \RequirePackage{mathtools}       % to be loaded before unicode-math, will load fontspec
-%\RequirePackage{amssymb}
 \RequirePackage{unicode-math}    % support opentype math fonts (load after mathtools!)
 \RequirePackage{lucidaBrightOT}  % set fonts, kerning etc.
 
@@ -55,7 +53,6 @@
 }
 
 % tables
-\RequirePackage{multirow}
 \RequirePackage{booktabs}
 \RequirePackage{tabularx}                                  % loads array package
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}  % tabular: fixed width left-justified column
@@ -66,8 +63,6 @@
 % lists
 \RequirePackage[inline]{enumitem}
 \setlist{leftmargin=*,nosep}  % global: no left indent, no vertical sep. for any list
-%\RequirePackage{multicol}
-%\setlength\multicolsep{0pt}
 
 % units
 \RequirePackage{siunitx}
@@ -85,14 +80,10 @@
 % local helper makros
 % ----------------------------------------------------------------
 % http://tex.stackexchange.com/questions/204699/smaller-vertical-space-between-repeated-environments
-% TODO: make more usable
-%\newcommand*{\SkipPenalty}{12345}
-%\newcommand*{\FlagSet}{\penalty\SkipPenalty}
-%\newcommand*{\FlagReset}{\penalty0}
-%\newcommand*{\SpaceAbove}{\ifnum\lastpenalty=\SkipPenalty\vskip-\baselineskip\FlagReset\fi}
-%\newcommand*{\SpaceBelow}{\par\addvspace{\baselineskip}\penalty\FlagSet}
-\newcommand*\SpaceAbove{\ifnum\lastpenalty=12345\vskip-\baselineskip\penalty0\fi}
-\newcommand*\SpaceBelow{\par\addvspace{\baselineskip}\penalty12345}
+\def\@NoBlankPenalty{12345}  % do not add vertical space at \MySkippingPenalty
+\newcommand*{\DoNotAddBlank}{\penalty\@NoBlankPenalty}
+\newcommand*{\SpaceAbove}{\ifnum\lastpenalty=\@NoBlankPenalty\vskip-\baselineskip\penalty0\fi}
+\newcommand*{\SpaceBelow}{\par\addvspace{\baselineskip}\penalty\@NoBlankPenalty}
 
 
 % ----------------------------------------------------------------
