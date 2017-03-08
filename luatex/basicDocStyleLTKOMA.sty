@@ -1,14 +1,16 @@
 % ==================================================================
-% FILE     basicDocStyleLT2.sty
+% FILE     basicDocStyleLT.sty
 % MACHINE  all
 % INFO     Preamble für alle Lua(La)TeX Dokumente
 %          Font: Lucida Bright (TUG)
-%          No KOMA-Skript here
 %
-% DATE     08.03.2017
+% DATE     06.03.2017
 % OWNER    Bischofberger
 % ==================================================================
-\ProvidesPackage{basicDocStyleLT}
+% TODO: 
+% - replace KOMA-Script: Titles, Headings, addmargin
+
+\ProvidesPackage{basicDocStyleLTKOMA}
 
 % fonts
 \RequirePackage{mathtools}       % to be loaded before unicode-math, will load fontspec
@@ -23,32 +25,19 @@
 \allowdisplaybreaks
 
 % typography, symbols etc.
-\RequirePackage[babel=true]{microtype}
+\RequirePackage{microtype}
 \RequirePackage{url}
 
-% header/footer
-\RequirePackage{fancyhdr}
-\pagestyle{fancy}
+% header/footer (KOMA-Script)
+\RequirePackage[headsepline,plainheadsepline]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\setkomafont{pageheadfoot}{\normalfont}
 
-% redefine sectional commands
-\renewcommand\section{\@startsection
-  {section}{1}{0mm}%
-  {-2\baselineskip}%
-  {2ex}%
-  {\sffamily\Large\bfseries}%
-}%
-\renewcommand\subsection{\@startsection
-  {subsection}{2}{0mm}%
-  {-2\baselineskip}%
-  {1ex}%
-  {\sffamily\large\bfseries}%
-}%
-\renewcommand\subsubsection{\@startsection
-  {subsubsection}{3}{0mm}%
-  {-\baselineskip}%
-  {1sp}%
-  {\sffamily\normalsize\bfseries}%
-}%
+% various KOMA script stuff
+\setkomafont{disposition}{\normalfont}
+\RedeclareSectionCommand[beforeskip=2\baselineskip,afterskip=\baselineskip]{section}
+\RedeclareSectionCommand[beforeskip=2\baselineskip]{subsection}
+\RedeclareSectionCommand[beforeskip=1\baselineskip,afterskip=1sp]{subsubsection}
 
 % floats, figures, captions...
 \RequirePackage{graphicx}
