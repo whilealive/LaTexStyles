@@ -3,17 +3,19 @@
 % MACHINE  all
 % INFO     collection of tikz macros
 %
-% DATE     18.02.2017
+% DATE     09.03.2017
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{tikzCollection}
 
+% Since \pgfgetlastxy returns pt, all the computations here are done in pt. This means, 
+% the arguments of \WSW{}{}{}{}{} have to be in pt only.
+
 % -----------------------
-% WSW-Dreieck-Berechnung:
-% \coordinate (A) at (0mm,0mm);
-% \coordinate (B) at (25mm,0mm);
-% \coordinate (C) at (0mm,0mm);
+% \coordinate (A) at (0,0);
+% \coordinate (B) at (25pt,0);
+% \coordinate (C) at (0,0);
 % \WSW{90}{A}{B}{45}{C};
 % \draw[fill=gray!30!] (A) -- node[below] {$s$} (B) -- (C) -- (A);
 % \WSW{60}{C}{B}{30}{A};
@@ -22,18 +24,18 @@
 % \draw[fill=gray!30!] (A) -- (B) -- (C) -- (A);
 % \WSW{30}{A}{C}{60}{B};
 % \draw (A) -- (B) -- node[right] {?} (C) -- (A);
+% -----------------------
 
-% Extrahiere x-/y-Koordinaten (Achtung: kommen in pt!!!)
+% Extraxt x-/y-Coordinates
 \newdimen\XCoord
 \newdimen\YCoord
 \newcommand*{\ExtractCoordinate}[1]{\path (#1); \pgfgetlastxy{\XCoord}{\YCoord};}
 
-% alle Einheiten müssen in mm sein!
 \newcommand*{\WSW}[5]{% #1:alpha, #2:A, #3:B, #4:beta , #5:C (will be redefined)
   % 1. compute distance between A and B
   \coordinate (AB) at ($(#3)-(#2)$);
   \ExtractCoordinate{AB};  % !!! units in pt !!!
-  \pgfmathsetmacro{\ABLength}{veclen(\convertto{mm}{\XCoord},\convertto{mm}{\YCoord})}
+  \pgfmathsetmacro{\ABLength}{veclen(\XCoord,\YCoord)}
 
   % 2. compute third angle in triangle
   \pgfmathsetmacro{\GammaAngle}{180-#1-#4}
@@ -45,13 +47,11 @@
   % 4. compute C using rotation matrix
   \coordinate (ABNormed) at ($1/\ABLength*(AB)$);
   \ExtractCoordinate{ABNormed};  % !!! units in pt !!!
-  \pgfmathsetmacro{\XCoord}{\convertto{mm}{\XCoord}}
-  \pgfmathsetmacro{\YCoord}{\convertto{mm}{\YCoord}}
   \pgfmathsetmacro{\ABNormedLength}{veclen(\XCoord,\YCoord)}
   \pgfmathsetmacro{\CosAlpha}{cos(#1)}
   \pgfmathsetmacro{\SinAlpha}{sin(#1)}
   \pgfmathsetmacro{\cx}{\ACLength*((\CosAlpha*\XCoord) + (-\SinAlpha*\YCoord))};
   \pgfmathsetmacro{\cy}{\ACLength*((\SinAlpha*\XCoord) + ( \CosAlpha*\YCoord))};
-  \coordinate (#5) at ($(#2)+(\cx mm,\cy mm)$);
+  \coordinate (#5) at ($(#2)+(\cx pt,\cy pt)$);
 }
 % -----------------------
