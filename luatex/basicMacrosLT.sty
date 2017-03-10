@@ -1,89 +1,13 @@
 % ==================================================================
-% FILE     basicDocStyleLT2.sty
+% FILE     basicMacrosLT.sty
 % MACHINE  all
-% INFO     Preamble für alle Lua(La)TeX Dokumente
-%          Font: Lucida Bright (TUG)
-%          No KOMA-Skript here
+% INFO     Macro collection (LuaLaTeX)
 %
-% DATE     08.03.2017
+% DATE     10.03.2017
 % OWNER    Bischofberger
 % ==================================================================
-\ProvidesPackage{basicDocStyleLT}
 
-% fonts
-\RequirePackage{mathtools}       % to be loaded before unicode-math, will load fontspec
-\RequirePackage{unicode-math}    % support opentype math fonts (load after mathtools!)
-\RequirePackage{lucidaBrightOT}  % set fonts, kerning etc.
-
-% language
-\RequirePackage[ngerman]{babel}
-
-% global settings
-\setlength{\parindent}{0pt}
-\allowdisplaybreaks
-
-% typography, symbols etc.
-\RequirePackage[babel=true]{microtype}
-\RequirePackage{url}
-
-% header/footer
-\RequirePackage{fancyhdr}
-\pagestyle{fancy}
-
-% redefine sectional commands
-\renewcommand\section{\@startsection
-  {section}{1}{0mm}%
-  {-2\baselineskip}%
-  {2ex}%
-  {\sffamily\Large\bfseries}%
-}%
-\renewcommand\subsection{\@startsection
-  {subsection}{2}{0mm}%
-  {-2\baselineskip}%
-  {1ex}%
-  {\sffamily\large\bfseries}%
-}%
-\renewcommand\subsubsection{\@startsection
-  {subsubsection}{3}{0mm}%
-  {-\baselineskip}%
-  {1sp}%
-  {\sffamily\normalsize\bfseries}%
-}%
-
-% floats, figures, captions...
-\RequirePackage{graphicx}
-\RequirePackage{float}
-\RequirePackage{caption}
-\captionsetup[figure]{%
-  name=Abb,
-  font=small,
-  format=plain,
-  justification=raggedright,
-  singlelinecheck=false%
-}
-
-% tables
-\RequirePackage{booktabs}
-\RequirePackage{tabularx}                                  % loads array package
-\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}  % tabular: fixed width left-justified column
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}    % tabular: fixed width centered column
-\newcolumntype{L}{>{\raggedright\arraybackslash}X}         % tabularx: left-justified column type for tabularx
-\newcolumntype{Z}{>{\centering\arraybackslash}X}           % tabularx: centered column type for tabularx
-
-% lists
-\RequirePackage[inline]{enumitem}
-\setlist{leftmargin=*,nosep}  % global: no left indent, no vertical sep. for any list
-
-% units
-\RequirePackage{siunitx}
-\sisetup{per-mode=symbol}
-
-% frames
-\RequirePackage{mdframed}
-
-% exercise enumerations (also loads environ)
-\RequirePackage{tasks}
-\NewTasks[label-width={1.2em},item-indent={1.5333em}]{Tasks}  % tasks with no left indent
+\ProvidesPackage{basicMacrosLT}
 
 
 % ----------------------------------------------------------------
@@ -140,6 +64,7 @@
 \newenvironment{Bem}{\SpaceAbove\BZ\noindent\textbf{Bemerkung\enspace}}{\SpaceBelow}
 
 % definition frame
+\RequirePackage{mdframed}
 \NewEnviron{FrameDef}
 {
   \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=1pt,innerbottommargin=0pt]
