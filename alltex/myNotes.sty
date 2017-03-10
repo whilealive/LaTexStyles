@@ -4,11 +4,15 @@
 % INFO     Notes...
 %          requires tikz package
 %
-% DATE     16.02.2017
+% DATE     09.03.2017
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{myNotes}
+
+% number of baselineskips above notes
+\def\@BeforeNotesSkip{0.5}
+\newcommand*{\SetBeforeNotesSkip}[1]{\def\@BeforeNotesSkip{#1}}
 
 % helper macro
 \newcommand*{\NotesCalc}{%
@@ -23,7 +27,7 @@
 
 % Notes
 \newcommand*{\Notes}[1]{% arg: number of rows
-  \BZ[.5]%
+  \BZ[\@BeforeNotesSkip]%
   \begin{tikzpicture}[scale=1]
     \NotesCalc
     \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin] 
@@ -33,7 +37,7 @@
 
 % Fill notes paper until end of page
 \newcommand*{\FillNotes}{%
-  \BZ[.5]%
+  \BZ[\@BeforeNotesSkip]%
   \begin{tikzpicture}
     \NotesCalc
     \pgfmathparse{int(\measurepage/\sizeOfSquares)}
