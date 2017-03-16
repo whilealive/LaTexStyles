@@ -4,7 +4,7 @@
 % INFO     basic layout for all my LuaLaTeX Documents
 %          Font: Lucida Bright (TUG)
 %
-% DATE     10.03.2017
+% DATE     15.03.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -71,14 +71,16 @@
 \newcolumntype{Z}{>{\centering\arraybackslash}X}           % tabularx: centered column type for tabularx
 
 % lists
-\RequirePackage[inline]{enumitem}
-\setlist{leftmargin=*,nosep}  % global: no left indent, no vertical sep. for any list
+\usepackage{tabto}
+\usepackage{paralist}
+%\setdefaultleftmargin{0em}{0em}{0em}{0em}{0em}{0em}
+% horizontal enumeration in multiple columns. Taken from:
+% http://tex.stackexchange.com/questions/89603/horizontal-enumeration-in-multiple-columns
+\newenvironment{tabbedenum}[1]
+ {\NumTabs{#1}\inparaenum[a)]\let\latexitem\item
+ \def\item{\def\item{\tab\latexitem}\latexitem}}{\endinparaenum}
 
 % units
 \RequirePackage{siunitx}
 \sisetup{per-mode=symbol}
-
-% exercise enumerations (also loads environ)
-\RequirePackage{tasks}
-\NewTasks[label-width={1.2em},item-indent={1.5333em}]{Tasks}  % tasks with no left indent
 

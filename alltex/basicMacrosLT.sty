@@ -1,52 +1,48 @@
 % ==================================================================
-% FILE     basicMathDocStyle.sty
+% FILE     basicMacrosLT.sty
 % MACHINE  all
-% INFO     Preamble for my math documents
+% INFO     Macro collection (LuaLaTeX)
 %
-% DATE     16.02.2017
+% DATE     16.03.2017
 % OWNER    Bischofberger
 % ==================================================================
 
-\ProvidesPackage{basicMathDocStyle}
-
-% depends on my basic style
-\RequirePackage{basicDocumentStyle}
-
-% math packages
-\RequirePackage{mathtools}
-\RequirePackage{amssymb}
-\RequirePackage{bm}
-
-% units
-\RequirePackage{siunitx}
-\sisetup{per-mode=symbol}
-
-% amsmath/mathtools stuff
-\allowdisplaybreaks
-\DeclarePairedDelimiter\abs{\lvert}{\rvert}
-
-% frames
-\RequirePackage{mdframed}
-
-% exercise enumerations (also loads environ)
-\RequirePackage{tasks}
-\NewTasks[label-width={1.2em},item-indent={1.5333em}]{Tasks}  % tasks with no left indent
+\ProvidesPackage{basicMacrosLT}
 
 
 % ----------------------------------------------------------------
 % local helper makros
 % ----------------------------------------------------------------
 % http://tex.stackexchange.com/questions/204699/smaller-vertical-space-between-repeated-environments
-\newcommand*\SpaceAbove{\ifnum\lastpenalty=12345\vskip-\baselineskip\penalty0\fi}
-\newcommand*\SpaceBelow{\par\addvspace{\baselineskip}\penalty12345}
+\def\@NoBlankPenalty{12345}  % do not add vertical space at \MySkippingPenalty
+\newcommand*{\DoNotAddBlank}{\penalty\@NoBlankPenalty}
+\newcommand*{\SpaceAbove}{\ifnum\lastpenalty=\@NoBlankPenalty\vskip-\baselineskip\penalty0\fi}
+\newcommand*{\SpaceBelow}{\par\addvspace{\baselineskip}\penalty\@NoBlankPenalty}
 
 
 % ----------------------------------------------------------------
-% various custom commands and environments...
+% custom commands and environments...
 % ----------------------------------------------------------------
+\newcommand*{\BZ}[1][1]{\par\vskip #1\baselineskip}  % 1 Blindzeile
+
+% fill page from bottom to top
+\newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
+
+% Struts for added vertical spacing in tabular environments
+% Insert struts directly in nominator/denominator/sub-/superscripts of fractions/sums etc.!
+\newcommand*\TStrut{\rule{0pt}{2.6ex}}       % Top strut
+\newcommand*\BStrut{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
+
+% unit conversion: \convertto{mm}{25}
+% % pt, mm, cm, ex, em, bp, dd, pc, in
+\def\convertto#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1\relax#1}
+
 % double underline for end results
 \newcommand*{\Result}[1]{\underline{\underline{#1}}}
 \newcommand*\bigfrac{\genfrac{}{}{1pt}{0}}   % nested fractions
+
+% absolute value
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
 
 % sets and constants
 \newcommand*{\N}{\mathbb{N}}
@@ -62,12 +58,17 @@
 \DeclareMathOperator{\Mean}{E}  % mean (stochastics)
 \DeclareMathOperator{\Var}{Var} % variance (stochastics)
 
+% sets (logic)
+\newcommand*{\Logic}[1]{\textsf{\textbf{#1}}}
+
 % Theorems
 \newenvironment{Bsp}{\SpaceAbove\BZ\noindent\textbf{Beispiel\enspace}}{\SpaceBelow}
 \newenvironment{Def}{\SpaceAbove\BZ\noindent\textbf{Definition\enspace}}{\SpaceBelow}
 \newenvironment{Bem}{\SpaceAbove\BZ\noindent\textbf{Bemerkung\enspace}}{\SpaceBelow}
 
 % definition frame
+\RequirePackage{mdframed}
+\RequirePackage{environ}
 \NewEnviron{FrameDef}
 {
   \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=1pt,innerbottommargin=0pt]
