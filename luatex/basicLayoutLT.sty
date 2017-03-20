@@ -4,7 +4,7 @@
 % INFO     basic layout for all my LuaLaTeX Documents
 %          Font: Lucida Bright (TUG)
 %
-% DATE     17.03.2017
+% DATE     20.03.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -61,26 +61,6 @@
   justification=raggedright,
   singlelinecheck=false%
 }
-
-% tables
-\RequirePackage{booktabs}
-\RequirePackage{tabularx}                                  % loads array package
-\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}  % tabular: fixed width left-justified column
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}    % tabular: fixed width centered column
-\newcolumntype{L}{>{\raggedright\arraybackslash}X}         % tabularx: left-justified column type for tabularx
-\newcolumntype{Z}{>{\centering\arraybackslash}X}           % tabularx: centered column type for tabularx
-
-% lists
-\RequirePackage{tabto}
-\RequirePackage[inline]{enumitem}
-\newlist{myenum}{enumerate}{2}
-\newlist{myitem}{itemize}{2}
-\newlist{alphenum}{enumerate}{2}
-\setlist[myenum,1,2]{label=\arabic*.,leftmargin=*,nosep,align=left}
-\setlist[myitem,1,2]{label=--,leftmargin=*,nosep,align=left}
-\setlist[alphenum,1,2]{label=\alph*),leftmargin=*,nosep,align=left,widest=a}  % manually set "widest=m" if list is %long
-\newenvironment{tabbedenum}[1]
- {\NumTabs{#1}\begin{enumerate*}[label=\alph*),itemjoin={\tab}]}{\end{enumerate*}}
 
 % units
 \RequirePackage{siunitx}

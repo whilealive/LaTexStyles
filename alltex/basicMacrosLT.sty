@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     16.03.2017
+% DATE     20.03.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -36,6 +36,27 @@
 % unit conversion: \convertto{mm}{25}
 % % pt, mm, cm, ex, em, bp, dd, pc, in
 \def\convertto#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1\relax#1}
+
+% tables
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}                                  % loads array package
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}  % tabular: fixed width left-justified column
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}    % tabular: fixed width centered column
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}         % tabularx: left-justified column type for tabularx
+\newcolumntype{Z}{>{\centering\arraybackslash}X}           % tabularx: centered column type for tabularx
+
+% lists
+\RequirePackage{tabto}
+\RequirePackage[inline]{enumitem}
+\newlist{myenum}{enumerate}{2}
+\newlist{myitem}{itemize}{2}
+\newlist{alphenum}{enumerate}{2}
+\setlist[myenum,1,2]{label=\arabic*.,leftmargin=*,nosep,align=left}
+\setlist[myitem,1,2]{label=--,leftmargin=*,nosep,align=left}
+\setlist[alphenum,1,2]{label=\alph*),leftmargin=*,nosep,align=left,widest=a}  % manually set "widest=m" if list is %long
+\newenvironment{tabbedenum}[1]
+  {\NumTabs{#1}\begin{enumerate*}[label=\alph*),itemjoin={\tab}]}
+  {\end{enumerate*}}
 
 % double underline for end results
 \newcommand*{\Result}[1]{\underline{\underline{#1}}}
