@@ -17,7 +17,7 @@
 \def\@NoBlankPenalty{12345}  % do not add vertical space at \MySkippingPenalty
 \newcommand*{\DoNotAddBlank}{\penalty\@NoBlankPenalty}
 \newcommand*{\SpaceAbove}{\ifnum\lastpenalty=\@NoBlankPenalty\vskip-\baselineskip\penalty0\fi}
-\newcommand*{\SpaceBelow}{\par\addvspace{\baselineskip}\penalty\@NoBlankPenalty}
+\newcommand*{\SpaceBelow}{\par\addvspace{\baselineskip}\DoNotAddBlank}
 
 
 % ----------------------------------------------------------------
@@ -108,7 +108,7 @@
       \BODY
     \end{Def}
   \end{mdframed}
-  \penalty12345
+  \DoNotAddBlank
 }
 
 
