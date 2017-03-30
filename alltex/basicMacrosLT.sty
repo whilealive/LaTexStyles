@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     20.03.2017
+% DATE     30.03.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -53,10 +53,16 @@
 \newlist{alphenum}{enumerate}{2}
 \setlist[myenum,1,2]{label=\arabic*.,leftmargin=*,nosep,align=left}
 \setlist[myitem,1,2]{label=--,leftmargin=*,nosep,align=left}
-\setlist[alphenum,1,2]{label=\alph*),leftmargin=*,nosep,align=left,widest=a}  % manually set "widest=m" if list is %long
-\newenvironment{tabbedenum}[1]
-  {\NumTabs{#1}\begin{enumerate*}[label=\alph*),itemjoin={\tab}]}
-  {\end{enumerate*}}
+\setlist[alphenum,1,2]{label=\alph*),leftmargin=*,nosep,align=left,widest=a}  % manually set "widest=m" if list is long
+\NewDocumentEnvironment{tabbedenum}{O{1ex} O{1ex} m}
+{%
+  \par\vskip #1
+  \NumTabs{#3}
+  \begin{enumerate*}[label=\alph*),itemjoin={\tab}]%
+}{%
+  \end{enumerate*}%
+  \par\vskip #2
+}
 
 % double underline for end results
 \newcommand*{\Result}[1]{\underline{\underline{#1}}}
@@ -82,6 +88,10 @@
 % sets (logic)
 \newcommand*{\Logic}[1]{\textsf{\textbf{#1}}}
 
+% radiant angle: frown above (coult be improved...)
+\newcommand*\Radiant[2][\textstyle]{\ensuremath{%
+  \array[b]{c}\text{\scalebox{1.6}{$#1\frown$}}\\[-1.8ex]#1#2\endarray}\kern-0.8em}
+
 % Theorems
 \newenvironment{Bsp}{\SpaceAbove\BZ\noindent\textbf{Beispiel\enspace}}{\SpaceBelow}
 \newenvironment{Def}{\SpaceAbove\BZ\noindent\textbf{Definition\enspace}}{\SpaceBelow}
@@ -90,6 +100,7 @@
 % definition frame
 \RequirePackage{mdframed}
 \RequirePackage{environ}
+\RequirePackage{xcolor}
 \NewEnviron{FrameDef}
 {
   \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=1pt,innerbottommargin=0pt]

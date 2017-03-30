@@ -2,48 +2,53 @@
 % FILE     myNotes.sty
 % MACHINE  all
 % INFO     Notes...
-%          requires tikz package
+%          requires tikz, xparse package
 %
-% DATE     09.03.2017
+% DATE     30.03.2017
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{myNotes}
 
-% number of baselineskips above notes
-\def\@BeforeNotesSkip{0.5}
-\newcommand*{\SetBeforeNotesSkip}[1]{\def\@BeforeNotesSkip{#1}}
-
 % helper macro
-\newcommand*{\NotesCalc}{%
+\NewDocumentCommand{\NotesCalc}{}%
+{%
   \pgfmathparse{\linewidth - \pgflinewidth}%
   \xdef\myLineWidth{\pgfmathresult}% correct width without line caps
   \pgfmathparse{\myLineWidth / int(\myLineWidth/4mm)}%
   \xdef\sizeOfSquares{\pgfmathresult}% +- 4mm square size
 }
 
+% \Notes[#1][#2]{#3}
+% args: #1 space above
+%       #2 space below
+%       #3 number of rows
+%       
+\NewDocumentCommand{\Notes}{O{1ex} O{0.3ex} m}%
+{%
+  \par\vskip #1
+  \begin{tikzpicture}[scale=1]%
+    \NotesCalc%
+    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]%
+      (0,0) grid (\myLineWidth pt, {#3 * \sizeOfSquares pt});%
+  \end{tikzpicture}%
+  \vskip #2
+}
+
 % http://tex.stackexchange.com/questions/14512/how-to-define-a-figure-size-so-that-it-consumes-the-rest-of-a-page
-\newcommand*\measurepage{\dimexpr\textheight-\pagetotal-\baselineskip\relax}
+\def\@Measurepage{\dimexpr\textheight-\pagetotal-\baselineskip\relax}
 
-% Notes
-\newcommand*{\Notes}[1]{% arg: number of rows
-  \BZ[\@BeforeNotesSkip]%
-  \begin{tikzpicture}[scale=1]
+% \FillNotes[#1]
+% args: #1 space above
+%
+\NewDocumentCommand{\FillNotes}{O{1ex}}%
+{%
+  \par\vskip #1
+  \begin{tikzpicture}%
     \NotesCalc
-    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin] 
-      (0,0) grid (\myLineWidth pt, {#1 * \sizeOfSquares pt});
+    \pgfmathparse{int(\@Measurepage/\sizeOfSquares)}%
+    \xdef\numberOfRows{\pgfmathresult}%
+    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]%
+      (0,0) grid (\myLineWidth pt, {\numberOfRows * \sizeOfSquares pt});%
   \end{tikzpicture}%
 }
-
-% Fill notes paper until end of page
-\newcommand*{\FillNotes}{%
-  \BZ[\@BeforeNotesSkip]%
-  \begin{tikzpicture}
-    \NotesCalc
-    \pgfmathparse{int(\measurepage/\sizeOfSquares)}
-    \xdef\numberOfRows{\pgfmathresult}
-    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]
-      (0,0) grid (\myLineWidth pt, {\numberOfRows * \sizeOfSquares pt});
-  \end{tikzpicture}%
-}
-
