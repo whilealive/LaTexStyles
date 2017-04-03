@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     tikz macros etc.
 %
-% DATE     17.02.2017
+% DATE     03.04.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -26,7 +26,7 @@
 % right angle
 % \RechterWinkel{A--B--C}{4mm}{thick,red};
 \newcommand*{\RechterWinkel}[3]{% #1 = three points B--A--C, #2 = radius, #3 = style
-  \draw[#3] pic[pic text=$\cdot$, draw, angle radius=#2, angle eccentricity=.55] {angle=#1};
+  \draw[#3] pic[pic text=., draw, angle radius=#2, angle eccentricity=.55] {angle=#1};
 }
 
 % Point that won't get scaled
