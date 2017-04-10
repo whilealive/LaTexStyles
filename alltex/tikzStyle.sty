@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     tikz macros etc.
 %
-% DATE     03.04.2017
+% DATE     08.04.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -23,15 +23,24 @@
 % circle arc around point
 \tikzset{partial ellipse/.style args={#1:#2:#3}{insert path={+ (#1:#3) arc (#1:#2:#3)}}}
 
-% right angle
-% \RechterWinkel{A--B--C}{4mm}{thick,red};
-\newcommand*{\RechterWinkel}[3]{% #1 = three points B--A--C, #2 = radius, #3 = style
-  \draw[#3] pic[pic text=., draw, angle radius=#2, angle eccentricity=.55] {angle=#1};
+% right angle, german style
+% \RechterWinkel{A--B--C}[4mm][thick,red];
+\NewDocumentCommand{\RechterWinkel}{ o m }
+{
+  \IfNoValueTF{#1}
+  {
+    \draw pic[pic text=., draw, angle eccentricity=.55] {angle=#2};
+  }
+  {
+    \draw pic[pic text=., draw, angle radius=#1, angle eccentricity=.55] {angle=#2};
+  }
 }
 
 % Point that won't get scaled
-\newcommand*{\Point}[3]{% #1 = coordinate, #2 = node text, #3 = node position
-  \draw[fill] (#1) node[circle,fill,inner sep=1.2pt] {} node[#3] {#2};
+% args: #1 = coordinate, #2 = node text, #3 = node position
+\newcommand*{\Point}[1]
+{%
+  \draw[fill] (#1) node[circle,fill,inner sep=1.3pt] {};
 }
 
 % nicer arrow tip default

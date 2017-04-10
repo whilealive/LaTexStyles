@@ -2,16 +2,19 @@
 % FILE     myNotes.sty
 % MACHINE  all
 % INFO     Notes...
-%          requires tikz, xparse package
+%          requires tikz
 %
-% DATE     30.03.2017
+% DATE     10.04.2017
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{myNotes}
 
-% helper macro
-\NewDocumentCommand{\NotesCalc}{}%
+\RequirePackage{tikz}
+
+% common computations
+%
+\newcommand*{\NotesCalc}
 {%
   \pgfmathparse{\linewidth - \pgflinewidth}%
   \xdef\myLineWidth{\pgfmathresult}% correct width without line caps
@@ -19,31 +22,43 @@
   \xdef\sizeOfSquares{\pgfmathresult}% +- 4mm square size
 }
 
-% \Notes[#1][#2]{#3}
-% args: #1 space above
-%       #2 space below
-%       #3 number of rows
-%       
-\NewDocumentCommand{\Notes}{O{1ex} O{0.3ex} m}%
+% measure space remaining on a page
+% http://tex.stackexchange.com/questions/14512/how-to-define-a-figure-size-so-that-it-consumes-the-rest-of-a-page
+%
+\def\@Measurepage{\dimexpr\textheight-\pagetotal-\baselineskip\relax}
+
+
+% key handling
+\pgfkeys
 {%
-  \par\vskip #1
+  mynotes/.is family, /mynotes,
+  default/.style={space above=1ex,space below=0.3ex},
+  space above/.estore in=\myNotesSpaceAbove,
+  space below/.estore in=\myNotesSpaceBelow,
+}
+
+% Notes[space above=1ex,space below=0.3ex]{10}
+% args: #1: options, #2: number of rows
+%
+\newcommand*{\Notes}[2][]
+{%
+  \pgfkeys{/mynotes, default, #1}%
+  \par\vskip \myNotesSpaceAbove
   \begin{tikzpicture}[scale=1]%
     \NotesCalc%
     \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]%
-      (0,0) grid (\myLineWidth pt, {#3 * \sizeOfSquares pt});%
+      (0,0) grid (\myLineWidth pt, {#2 * \sizeOfSquares pt});%
   \end{tikzpicture}%
-  \vskip #2
+  \vskip \myNotesSpaceBelow
 }
 
-% http://tex.stackexchange.com/questions/14512/how-to-define-a-figure-size-so-that-it-consumes-the-rest-of-a-page
-\def\@Measurepage{\dimexpr\textheight-\pagetotal-\baselineskip\relax}
-
-% \FillNotes[#1]
-% args: #1 space above
+% \FillNotes[space above=1ex]
+% args: #1: options
 %
-\NewDocumentCommand{\FillNotes}{O{1ex}}%
+\newcommand*{\FillNotes}[1][]
 {%
-  \par\vskip #1
+  \pgfkeys{/mynotes, default, #1}%
+  \par\vskip\myNotesSpaceAbove\par
   \begin{tikzpicture}%
     \NotesCalc
     \pgfmathparse{int(\@Measurepage/\sizeOfSquares)}%
@@ -51,4 +66,5 @@
     \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]%
       (0,0) grid (\myLineWidth pt, {\numberOfRows * \sizeOfSquares pt});%
   \end{tikzpicture}%
+  \clearpage
 }

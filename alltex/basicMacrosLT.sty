@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     30.03.2017
+% DATE     10.04.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -46,7 +46,6 @@
 \newcolumntype{Z}{>{\centering\arraybackslash}X}           % tabularx: centered column type for tabularx
 
 % lists
-\RequirePackage{tabto}
 \RequirePackage[inline]{enumitem}
 \newlist{myenum}{enumerate}{2}
 \newlist{myitem}{itemize}{2}
@@ -54,17 +53,53 @@
 \setlist[myenum,1,2]{label=\arabic*.,leftmargin=*,nosep,align=left}
 \setlist[myitem,1,2]{label=--,leftmargin=*,nosep,align=left}
 \setlist[alphenum,1,2]{label=\alph*),leftmargin=*,nosep,align=left,widest=a}  % manually set "widest=m" if list is long
-\NewDocumentEnvironment{tabbedenum}{O{1ex} O{1ex} m}
+
+% ----------
+% tabbedenum: horizontal alphanumeric lists (for exercises)
+%
+% key-value handling
+% TODO: respect latex3 naming conventions.
+\ExplSyntaxOn
+\keys_define:nn {tabbedenumModul}
 {%
-  \par\vskip #1
-  \NumTabs{#3}
-  \begin{enumerate*}[label=\alph*),itemjoin={\tab}]%
-}{%
-  \end{enumerate*}%
-  \par\vskip #2
+  space above  .tl_set:N = \tabbedenumSpaceAbove,
+  space below  .tl_set:N = \tabbedenumSpacebelow,
+  line spacing .tl_set:N = \tabbedenumLineSpacing,
+  space above  .value_required:n = true,
+  space below  .value_required:n = true,
+  line spacing .value_required:n = true,
+  space above  .initial:n = 0ex,
+  space below  .initial:n = 0ex,
+  line spacing .initial:n = 1.2,
 }
 
+% \begin{tabbedenum}[space above=0ex,space below=0ex]{2} ...
+% args: #1 (optional): space above/below, #2: \item...
+% http://tex.stackexchange.com/questions/34971/how-to-keep-a-constant-baselineskip-when-using-minipages-or-parboxes
+%
+\RequirePackage{tabto}
+\NewDocumentEnvironment{tabbedenum}{ o m }
+{%
+  \group_begin:
+    \IfNoValueF{#1}{\keys_set:nn{tabbedenumModul}{#1}}
+    \par\vskip \tabbedenumSpaceAbove
+    \NumTabs{#2}
+    \begin{minipage}[t]{\textwidth}
+      \linespread{\tabbedenumLineSpacing}\selectfont
+      \begin{enumerate*}[label=\alph*),itemjoin={\tab}]%
+}{%
+      \end{enumerate*}%
+      \par\xdef\tpd{\the\prevdepth}
+    \end{minipage}
+    \par\prevdepth\tpd
+    \par\vspace{\tabbedenumSpacebelow}
+  \group_end:
+}
+\ExplSyntaxOff
+% ----------
+
 % double underline for end results
+% TODO: add vertical space between line and text
 \newcommand*{\Result}[1]{\underline{\underline{#1}}}
 \newcommand*\bigfrac{\genfrac{}{}{1pt}{0}}   % nested fractions
 
@@ -137,7 +172,7 @@
   \BZ\noindent\textbf{Aufgabe~#1*\enspace}%
 }{\SpaceBelow}
 
-% Lösung einer einzelnen Aufgabe.
+% solution of a single exercise
 \newenvironment{LsgAufg}[1]{%
   \textbf{Aufg. \ref{#1} }%
 }{\par\addvspace{.5\baselineskip}}
