@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     10.04.2017
+% DATE     11.04.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -57,14 +57,13 @@
 % ----------
 % tabbedenum: horizontal alphanumeric lists (for exercises)
 %
-% key-value handling
-% TODO: respect latex3 naming conventions.
+% keys
 \ExplSyntaxOn
-\keys_define:nn {tabbedenumModul}
+\keys_define:nn{basicMacros/tabbedenum}
 {%
-  space above  .tl_set:N = \tabbedenumSpaceAbove,
-  space below  .tl_set:N = \tabbedenumSpacebelow,
-  line spacing .tl_set:N = \tabbedenumLineSpacing,
+  space above  .tl_set:N = \l__basicMacros_SpaceAbove_tl,
+  space below  .tl_set:N = \l__basicMacros_SpaceBelow_tl,
+  line spacing .tl_set:N = \l__basicMacros_LineSpacing_tl,
   space above  .value_required:n = true,
   space below  .value_required:n = true,
   line spacing .value_required:n = true,
@@ -81,21 +80,22 @@
 \NewDocumentEnvironment{tabbedenum}{ o m }
 {%
   \group_begin:
-    \IfNoValueF{#1}{\keys_set:nn{tabbedenumModul}{#1}}
-    \par\vskip \tabbedenumSpaceAbove
+    \IfNoValueF{#1}{\keys_set:nn{basicMacros/tabbedenum}{#1}}
+    \par\vskip \l__basicMacros_SpaceAbove_tl
     \NumTabs{#2}
     \begin{minipage}[t]{\textwidth}
-      \linespread{\tabbedenumLineSpacing}\selectfont
+      \linespread{\l__basicMacros_LineSpacing_tl}\selectfont
       \begin{enumerate*}[label=\alph*),itemjoin={\tab}]%
 }{%
       \end{enumerate*}%
       \par\xdef\tpd{\the\prevdepth}
     \end{minipage}
     \par\prevdepth\tpd
-    \par\vspace{\tabbedenumSpacebelow}
+    \par\vspace{\l__basicMacros_SpaceBelow_tl}
   \group_end:
 }
 \ExplSyntaxOff
+%
 % ----------
 
 % double underline for end results
