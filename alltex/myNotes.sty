@@ -7,18 +7,29 @@
 % DATE     12.04.2017
 % OWNER    Bischofberger
 % ==================================================================
+% TODO: add boolean option "exact" to give exact square sizes
 
 \ProvidesPackage{myNotes}
 
 \RequirePackage{tikz}
 
+% key handling
+\pgfkeys
+{%
+  mynotes/.is family, /mynotes,
+  default/.style={space above=1ex,space below=0.3ex,square size=4mm},
+  space above/.estore in=\myNotesSpaceAbove,
+  space below/.estore in=\myNotesSpaceBelow,
+  square size/.estore in=\myNotesSquareSize
+}
+
 % common computations
 %
-\newcommand*{\NotesCalc}
+\newcommand*{\ComputeSizeOfSquares}
 {%
   \pgfmathparse{\linewidth - \pgflinewidth}%
   \xdef\myLineWidth{\pgfmathresult}% correct width without line caps
-  \pgfmathparse{\myLineWidth / int(\myLineWidth/4mm)}%
+  \pgfmathparse{\myLineWidth / int(\myLineWidth/\myNotesSquareSize)}%
   \xdef\sizeOfSquares{\pgfmathresult}% +- 4mm square size
 }
 
@@ -28,16 +39,7 @@
 \def\@Measurepage{\dimexpr\textheight-\pagetotal-\baselineskip\relax}
 
 
-% key handling
-\pgfkeys
-{%
-  mynotes/.is family, /mynotes,
-  default/.style={space above=1ex,space below=0.3ex},
-  space above/.estore in=\myNotesSpaceAbove,
-  space below/.estore in=\myNotesSpaceBelow,
-}
-
-% Notes[space above=1ex,space below=0.3ex]{10}
+% Notes[space above=1ex,space below=0.3ex,square size=4mm]{10}
 % args: #1: options, #2: number of rows
 %
 \newcommand*{\Notes}[2][]
@@ -45,14 +47,14 @@
   \pgfkeys{/mynotes, default, #1}%
   \par\vskip\myNotesSpaceAbove
   \begin{tikzpicture}[scale=1]%
-    \NotesCalc%
+    \ComputeSizeOfSquares%
     \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]%
       (0,0) grid (\myLineWidth pt, {#2 * \sizeOfSquares pt});%
   \end{tikzpicture}%
   \vskip \myNotesSpaceBelow
 }
 
-% \FillNotes[space above=1ex]
+% \FillNotes[space above=1ex,square size=4mm]
 % args: #1: options
 %
 \newcommand*{\FillNotes}[1][]
@@ -60,7 +62,7 @@
   \pgfkeys{/mynotes, default, #1}%
   \par\vskip\myNotesSpaceAbove\par
   \begin{tikzpicture}%
-    \NotesCalc
+    \ComputeSizeOfSquares%
     \pgfmathparse{int(\@Measurepage/\sizeOfSquares)}%
     \xdef\numberOfRows{\pgfmathresult}%
     \draw[draw=none] (0,0) -- (0,\@Measurepage); % hack: this aligns notes at the bottom of the page
