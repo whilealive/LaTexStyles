@@ -4,7 +4,7 @@
 % INFO     Notes...
 %          requires tikz
 %
-% DATE     10.04.2017
+% DATE     12.04.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -43,7 +43,7 @@
 \newcommand*{\Notes}[2][]
 {%
   \pgfkeys{/mynotes, default, #1}%
-  \par\vskip \myNotesSpaceAbove
+  \par\vskip\myNotesSpaceAbove
   \begin{tikzpicture}[scale=1]%
     \NotesCalc%
     \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]%
@@ -63,8 +63,8 @@
     \NotesCalc
     \pgfmathparse{int(\@Measurepage/\sizeOfSquares)}%
     \xdef\numberOfRows{\pgfmathresult}%
+    \draw[draw=none] (0,0) -- (0,\@Measurepage); % hack: this aligns notes at the bottom of the page
     \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]%
       (0,0) grid (\myLineWidth pt, {\numberOfRows * \sizeOfSquares pt});%
   \end{tikzpicture}%
-  \clearpage
 }
