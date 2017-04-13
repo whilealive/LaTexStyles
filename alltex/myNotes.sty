@@ -2,35 +2,42 @@
 % FILE     myNotes.sty
 % MACHINE  all
 % INFO     Notes...
-%          requires tikz
 %
 % DATE     12.04.2017
 % OWNER    Bischofberger
 % ==================================================================
-% TODO: add boolean option "exact" to give exact square sizes
 
 \ProvidesPackage{myNotes}
 
 \RequirePackage{tikz}
 
 % key handling
+\newif\ifmyNotesExact
 \pgfkeys
 {%
   mynotes/.is family, /mynotes,
-  default/.style={space above=1ex,space below=0.3ex,square size=4mm},
+  default/.style={space above=1ex,space below=0.3ex,square size=4mm,exact=false},
   space above/.estore in=\myNotesSpaceAbove,
   space below/.estore in=\myNotesSpaceBelow,
-  square size/.estore in=\myNotesSquareSize
+  square size/.estore in=\myNotesSquareSize,
+  exact/.is if=myNotesExact
 }
 
 % common computations
 %
 \newcommand*{\ComputeSizeOfSquares}
 {%
-  \pgfmathparse{\linewidth - \pgflinewidth}%
-  \xdef\myLineWidth{\pgfmathresult}% correct width without line caps
-  \pgfmathparse{\myLineWidth / int(\myLineWidth/\myNotesSquareSize)}%
-  \xdef\sizeOfSquares{\pgfmathresult}% +- 4mm square size
+  \ifmyNotesExact
+    \pgfmathparse{\myNotesSquareSize}%
+    \xdef\sizeOfSquares{\pgfmathresult}% <- exact square size
+    \pgfmathparse{int((\linewidth-\pgflinewidth)/\sizeOfSquares)*\sizeOfSquares}%
+    \xdef\myLineWidth{\pgfmathresult}%
+  \else
+    \pgfmathparse{\linewidth-\pgflinewidth}% correct width without line caps
+    \xdef\myLineWidth{\pgfmathresult}
+    \pgfmathparse{\myLineWidth/int(\myLineWidth/\myNotesSquareSize)}%
+    \xdef\sizeOfSquares{\pgfmathresult}% +- square size
+  \fi
 }
 
 % measure space remaining on a page
@@ -48,7 +55,7 @@
   \par\vskip\myNotesSpaceAbove
   \begin{tikzpicture}[scale=1]%
     \ComputeSizeOfSquares%
-    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]%
+    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!]%
       (0,0) grid (\myLineWidth pt, {#2 * \sizeOfSquares pt});%
   \end{tikzpicture}%
   \vskip \myNotesSpaceBelow
@@ -66,7 +73,7 @@
     \pgfmathparse{int(\@Measurepage/\sizeOfSquares)}%
     \xdef\numberOfRows{\pgfmathresult}%
     \draw[draw=none] (0,0) -- (0,\@Measurepage); % hack: this aligns notes at the bottom of the page
-    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!, thin]%
+    \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!]%
       (0,0) grid (\myLineWidth pt, {\numberOfRows * \sizeOfSquares pt});%
   \end{tikzpicture}%
 }
