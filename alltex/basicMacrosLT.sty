@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     11.04.2017
+% DATE     26.04.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -17,7 +17,9 @@
 \def\@NoBlankPenalty{12345}  % do not add vertical space at \MySkippingPenalty
 \newcommand*{\DoNotAddBlank}{\penalty\@NoBlankPenalty}
 \newcommand*{\SpaceAbove}{\ifnum\lastpenalty=\@NoBlankPenalty\vskip-\baselineskip\penalty0\fi}
-\newcommand*{\SpaceBelow}{\par\addvspace{\baselineskip}\DoNotAddBlank}
+\newlength{\AfterSkip}
+\setlength{\AfterSkip}{\baselineskip}
+\newcommand*{\SpaceBelow}{\par\addvspace{\AfterSkip}\DoNotAddBlank}
 
 
 % ----------------------------------------------------------------
