@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     26.04.2017
+% DATE     27.04.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -101,7 +101,7 @@
 % ----------
 
 % double underline for end results
-\newcommand{\Result}[1]{\underline{\underline{#1\rule[-0.7ex]{0pt}{0pt}}}}
+\newcommand{\Result}[1]{\underline{\underline{#1\rule[-0.6ex]{0pt}{0pt}}}}
 \newcommand*\bigfrac{\genfrac{}{}{1pt}{0}}   % nested fractions
 
 % absolute value
@@ -134,14 +134,12 @@
 \newenvironment{Bem}{\SpaceAbove\BZ\noindent\textbf{Bemerkung\enspace}}{\SpaceBelow}
 
 % definition frame
-\RequirePackage{mdframed}
-\RequirePackage{environ}
-\RequirePackage{xcolor}
-\NewEnviron{FrameDef}
-{
+\RequirePackage[xcolor]{mdframed}
+\NewDocumentEnvironment{FrameDef}{}
+{%
   \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=1pt,innerbottommargin=0pt]
     \begin{Def}
-      \BODY
+}{%
     \end{Def}
   \end{mdframed}
   \DoNotAddBlank
