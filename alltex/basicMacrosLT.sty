@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     27.04.2017
+% DATE     01.05.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -66,12 +66,15 @@
   space above  .tl_set:N = \l__basicMacros_SpaceAbove_tl,
   space below  .tl_set:N = \l__basicMacros_SpaceBelow_tl,
   line spacing .tl_set:N = \l__basicMacros_LineSpacing_tl,
+  label        .tl_set:N = \l__basicMacros_Label_tl,
   space above  .value_required:n = true,
   space below  .value_required:n = true,
   line spacing .value_required:n = true,
+  label        .value_required:n = true,
   space above  .initial:n = 0ex,
   space below  .initial:n = 0ex,
   line spacing .initial:n = 1.2,
+  label        .initial:n = \alph*),
 }
 
 % \begin{tabbedenum}[space above=0ex,space below=0ex]{2} ...
@@ -87,7 +90,7 @@
     \NumTabs{#2}
     \begin{minipage}[t]{\textwidth}
       \linespread{\l__basicMacros_LineSpacing_tl}\selectfont
-      \begin{enumerate*}[label=\alph*),itemjoin={\tab}]%
+      \begin{enumerate*}[label=\l__basicMacros_Label_tl,itemjoin={\tab}]%
 }{%
       \end{enumerate*}%
       \par\xdef\tpd{\the\prevdepth}
