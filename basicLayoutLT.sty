@@ -1,19 +1,24 @@
 % ==================================================================
 % FILE     basicLayoutLT.sty
 % MACHINE  all
-% INFO     basic layout for all my LuaLaTeX Documents
-%          Font: Lucida Bright (TUG)
+% INFO     basic layout for all my pdfTeX Documents
+%          Font: latin modern
 %
-% DATE     08.04.2017
+% DATE     01.05.2017
 % OWNER    Bischofberger
 % ==================================================================
 
 \ProvidesPackage{basicLayoutLT}
 
 % fonts
-\RequirePackage{mathtools}       % to be loaded before unicode-math, will load fontspec
-\RequirePackage{unicode-math}    % support opentype math fonts (load after mathtools!)
-\RequirePackage{lucidaBrightOT}  % set fonts, kerning etc.
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8x]{inputenc}
+\RequirePackage[ngerman]{babel}
+\RequirePackage{lmodern}
+
+% math packages
+\RequirePackage{mathtools}
+\RequirePackage{amssymb}
 
 % language
 \RequirePackage[ngerman]{babel}
