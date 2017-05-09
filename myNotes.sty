@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Notes...
 %
-% DATE     12.04.2017
+% DATE     09.05.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -43,7 +43,7 @@
 % measure space remaining on a page
 % http://tex.stackexchange.com/questions/14512/how-to-define-a-figure-size-so-that-it-consumes-the-rest-of-a-page
 %
-\def\@Measurepage{\dimexpr\textheight-\pagetotal-\baselineskip\relax}
+\def\@Measurepage{\dimexpr\textheight-\pagetotal-2\pgflinewidth\relax}
 
 
 % Notes[space above=1ex,space below=0.3ex,square size=4mm]{10}
@@ -52,7 +52,7 @@
 \newcommand*{\Notes}[2][]
 {%
   \pgfkeys{/mynotes, default, #1}%
-  \par\vskip\myNotesSpaceAbove
+  \vskip\myNotesSpaceAbove\par
   \begin{tikzpicture}[scale=1]%
     \ComputeSizeOfSquares%
     \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!]%
@@ -67,14 +67,13 @@
 \newcommand*{\FillNotes}[1][]
 {%
   \pgfkeys{/mynotes, default, #1}%
-  \par\vskip\myNotesSpaceAbove\par
+  \vskip\myNotesSpaceAbove\par  % \par is needed for the correct value of \@Measurepage
   \begin{tikzpicture}%
     \ComputeSizeOfSquares%
     \pgfmathparse{int(\@Measurepage/\sizeOfSquares)}%
     \xdef\numberOfRows{\pgfmathresult}%
-    \draw[draw=none] (0,0) -- (0,\@Measurepage); % hack: this aligns notes at the bottom of the page
     \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!]%
       (0,0) grid (\myLineWidth pt, {\numberOfRows * \sizeOfSquares pt});%
   \end{tikzpicture}%
-  \par
+  \clearpage
 }
