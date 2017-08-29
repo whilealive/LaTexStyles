@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     30.06.2017
+% DATE     29.08.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -105,7 +105,10 @@
 
 % double underline for end results
 \newcommand{\Result}[1]{\underline{\underline{#1\rule[-0.6ex]{0pt}{0pt}}}}
+
+% fracs, sqrts, etc.
 \newcommand*\bigfrac{\genfrac{}{}{1pt}{0}}   % nested fractions
+\newcommand*{\NthSqrt}[2]{\sqrt[\leftroot{0}\uproot{0}\scriptstyle #1]{#2}}
 
 % absolute value
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
