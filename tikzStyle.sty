@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     tikz macros etc.
 %
-% DATE     08.04.2017
+% DATE     26.05.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -23,24 +23,32 @@
 % circle arc around point
 \tikzset{partial ellipse/.style args={#1:#2:#3}{insert path={+ (#1:#3) arc (#1:#2:#3)}}}
 
+\pgfkeys
+{%
+  tikzStyle/.is family, /tikzStyle,
+  default/.style={node text=, node pos=, angle radius=5mm, color=black},
+  node text/.estore in=\tikzStyleNoteText,
+  node pos/.estore in=\tikzStyleNotePos,
+  angle radius/.estore in=\tikzStyleAngleRad,
+  color/.estore in=\tikzStyleColor
+}
+
 % right angle, german style
-% \RechterWinkel{A--B--C}[4mm][thick,red];
-\NewDocumentCommand{\RechterWinkel}{ o m }
-{
-  \IfNoValueTF{#1}
-  {
-    \draw pic[pic text=., draw, angle eccentricity=.55] {angle=#2};
-  }
-  {
-    \draw pic[pic text=., draw, angle radius=#1, angle eccentricity=.55] {angle=#2};
-  }
+% \RechterWinkel[]{A--B--C};
+\newcommand*{\RechterWinkel}[2][]
+{%
+  \pgfkeys{/tikzStyle, default, #1}%
+  \draw pic[pic text=., draw, angle radius=\tikzStyleAngleRad, angle eccentricity=.55, color=\tikzStyleColor] {angle=#2};
 }
 
 % Point that won't get scaled
-% args: #1 = coordinate, #2 = node text, #3 = node position
-\newcommand*{\Point}[1]
+% args: #1 = optional key-value (node text / node pos), #2 = coordinates
+\newcommand*{\Point}[2][]
 {%
-  \draw[fill] (#1) node[circle,fill,inner sep=1.3pt] {};
+  \pgfkeys{/tikzStyle, default, #1}%
+  \draw[fill, color=\tikzStyleColor] (#2) 
+    node[circle,fill, inner sep=1.3pt] {}
+    node[\tikzStyleNotePos] {\tikzStyleNoteText};
 }
 
 % nicer arrow tip default

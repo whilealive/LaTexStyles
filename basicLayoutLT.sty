@@ -29,7 +29,7 @@
 
 % typography, symbols etc.
 \RequirePackage[babel=true]{microtype}
-\RequirePackage{url}
+\RequirePackage[hyphens]{url}
 
 % header/footer
 \RequirePackage{fancyhdr}
@@ -68,7 +68,7 @@
 
 % units
 \RequirePackage{siunitx}
-\sisetup{per-mode=symbol}
+\sisetup{per-mode=symbol,exponent-product=\cdot}
 
 % modify margins on the fly with "\begin{adjustwidth}{-20mm}{-10mm}"
 \usepackage[strict]{changepage}

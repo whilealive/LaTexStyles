@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (pdftex)
 %
-% DATE     01.05.2017
+% DATE     21.09.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -25,7 +25,8 @@
 % ----------------------------------------------------------------
 % custom commands and environments...
 % ----------------------------------------------------------------
-\newcommand*{\BZ}[1][1]{\par\vskip #1\baselineskip}  % 1 Blindzeile
+\newcommand*{\BZ}[1][1]{\vskip #1\baselineskip}  % 1 Blindzeile
+\newcommand*{\hBZ}{\BZ[.5]}                      % 1/2 Blindzeile
 
 % fill page from bottom to top
 \newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
@@ -105,20 +106,23 @@
 
 % double underline for end results
 \newcommand{\Result}[1]{\underline{\underline{#1\rule[-0.6ex]{0pt}{0pt}}}}
+
+% fracs, sqrts, etc.
 \newcommand*\bigfrac{\genfrac{}{}{1pt}{0}}   % nested fractions
+\newcommand*{\NthRoot}[2]{\sqrt[\leftroot{0}\uproot{0}\scriptstyle #1]{#2}}
 
 % absolute value
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 
 % sets and constants
-\newcommand*{\N}{\mathbb{N}}
-\newcommand*{\Z}{\mathbb{Z}}
-\newcommand*{\Q}{\mathbb{Q}}
-\newcommand*{\R}{\mathbb{R}}
-\newcommand*{\C}{\mathbb{C}}
-\newcommand*{\Euler}{e}
-\newcommand*{\Complex}{i}
-\newcommand*{\D}[1]{\mathrm{d}#1}  % dx, dy...
+\newcommand*{\N}{\ensuremath{\mathbb{N}}}
+\newcommand*{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand*{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand*{\R}{\ensuremath{\mathbb{R}}}
+\newcommand*{\C}{\ensuremath{\mathbb{C}}}
+\newcommand*{\Euler}{\ensuremath{\mathrm{e}}}
+\newcommand*{\Complex}{\ensuremath{i}}
+\newcommand*{\D}[1]{\ensuremath{\mathrm{d}#1}}  % dx, dy...
 \DeclareMathOperator{\GGT}{ggT}
 \DeclareMathOperator{\KGV}{kgV}
 \DeclareMathOperator{\Mean}{E}  % mean (stochastics)
@@ -129,12 +133,14 @@
 
 % radiant angle: frown above (coult be improved...)
 \newcommand*\Radiant[2][\textstyle]{\ensuremath{%
-  \array[b]{c}\text{\scalebox{1.6}{$#1\frown$}}\\[-1.8ex]#1#2\endarray}\kern-0.8em}
+  \kern-.7em\array[b]{c}\text{\scalebox{1.6}{$#1\frown$}}\\[-1.8ex]#1#2\endarray}\kern-0.8em}
 
 % Theorems
 \newenvironment{Bsp}{\SpaceAbove\BZ\noindent\textbf{Beispiel\enspace}}{\SpaceBelow}
 \newenvironment{Def}{\SpaceAbove\BZ\noindent\textbf{Definition\enspace}}{\SpaceBelow}
 \newenvironment{Bem}{\SpaceAbove\BZ\noindent\textbf{Bemerkung\enspace}}{\SpaceBelow}
+\newenvironment{Zus}{\SpaceAbove\BZ\noindent\textbf{Zusammenfassung\enspace}}{\SpaceBelow}
+\newenvironment{Sol}{\SpaceAbove\BZ\noindent\textit{Lösung\enspace}}{\SpaceBelow}
 
 % definition frame
 \RequirePackage[xcolor]{mdframed}
