@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (pdftex)
 %
-% DATE     21.09.2017
+% DATE     14.12.2017
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -64,17 +64,17 @@
 \ExplSyntaxOn
 \keys_define:nn{basicMacros/tabbedenum}
 {%
-  space above  .tl_set:N = \l__basicMacros_SpaceAbove_tl,
-  space below  .tl_set:N = \l__basicMacros_SpaceBelow_tl,
-  line spacing .tl_set:N = \l__basicMacros_LineSpacing_tl,
+  space-above  .tl_set:N = \l__basicMacros_SpaceAbove_tl,
+  space-below  .tl_set:N = \l__basicMacros_SpaceBelow_tl,
+  line-spacing .tl_set:N = \l__basicMacros_LineSpacing_tl,
   label        .tl_set:N = \l__basicMacros_Label_tl,
-  space above  .value_required:n = true,
-  space below  .value_required:n = true,
-  line spacing .value_required:n = true,
+  space-above  .value_required:n = true,
+  space-below  .value_required:n = true,
+  line-spacing .value_required:n = true,
   label        .value_required:n = true,
-  space above  .initial:n = 0ex,
-  space below  .initial:n = 0ex,
-  line spacing .initial:n = 1.2,
+  space-above  .initial:n = 0ex,
+  space-below  .initial:n = 0ex,
+  line-spacing .initial:n = 1.2,
   label        .initial:n = \alph*),
 }
 
@@ -104,8 +104,9 @@
 %
 % ----------
 
-% double underline for end results
+% for math exercises...
 \newcommand{\Result}[1]{\underline{\underline{#1\rule[-0.6ex]{0pt}{0pt}}}}
+\newcommand*{\Checkbox}{\tikz \draw (0,0) rectangle (1.5ex,1.5ex);}
 
 % fracs, sqrts, etc.
 \newcommand*\bigfrac{\genfrac{}{}{1pt}{0}}   % nested fractions
@@ -165,7 +166,7 @@
   \refstepcounter{excounter}%
   \SpaceAbove%
   \label{#1}%
-  \BZ\noindent\textbf{Aufgabe~\theexcounter{\boldmath$^{L}$}\enspace}%
+  \BZ\noindent\textbf{Aufgabe~\theexcounter\enspace}%
 }{\SpaceBelow}
 
 \newenvironment{Aufg}[1][\theexcounter]{% normal
