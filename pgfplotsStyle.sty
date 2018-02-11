@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     pgfplots macros etc.
 %
-% DATE     25.01.2018
+% DATE     11.02.2018
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -26,26 +26,3 @@
   }
 }
 
-
-% Standard Graph
-\newcommand*{\SetGraphDimensions}[5]
-{%
-  \pgfmathsetmacro{\Width}{#1}
-  \pgfmathsetmacro{\Xmin}{#2}
-  \pgfmathsetmacro{\Xmax}{#3}
-  \pgfmathsetmacro{\Ymin}{#4}
-  \pgfmathsetmacro{\Ymax}{#5}
-  \pgfmathsetmacro{\UnitVectorLength}{\Width/(\Xmax-\Xmin+1)}
-}
-\pgfplotsset{StandardGraphStyle/.style={%
-  xmin=\Xmin, xmax=\Xmax, ymin=\Ymin, ymax=\Ymax,
-  x=\UnitVectorLength, y=\UnitVectorLength,
-  axis lines=center,
-  axis line style={shorten >=-.5*\UnitVectorLength, shorten <=-.5*\UnitVectorLength},
-  xlabel style={above=2pt,at={(ticklabel* cs:1.0)},fill=white},
-  ylabel style={right=2pt,at={(ticklabel* cs:1.0)},fill=white},
-  xlabel={$x$}, ylabel={$y$},
-  xtick distance=1, ytick distance=1,
-  grid=major,%
-  }%
-}
