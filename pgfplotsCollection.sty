@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     collection of extended pgfplots macros
 %
-% DATE     11.02.2018
+% DATE     13.02.2018
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -21,7 +21,10 @@
 }
 \pgfplotsset{StandardGraphStyle/.style={%
   xmin=\Xmin, xmax=\Xmax, ymin=\Ymin, ymax=\Ymax,
+  domain=\Xmin:\Xmax,
+  restrict y to domain=\Ymin:\Ymax,
   x=\UnitVectorLength, y=\UnitVectorLength,
+  samples=200,
   axis lines=center,
   axis line style={shorten >=-.5*\UnitVectorLength, shorten <=-.5*\UnitVectorLength},
   xlabel style={above=2pt,at={(ticklabel* cs:1.0)},fill=white},
