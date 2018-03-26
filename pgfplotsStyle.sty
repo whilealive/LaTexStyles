@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     pgfplots macros etc.
 %
-% DATE     11.02.2018
+% DATE     22.03.2018
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -13,16 +13,16 @@
 \pgfplotsset{compat=newest}
 
 % set axis origin as: "axis line origin={-1,0},"
-\pgfplotsset{%
-  axis line origin/.style args={#1,#2}{%
-    x filter/.append code={ % Check for empty or filtered out numbers
-      \ifx\pgfmathresult\empty\else\pgfmathparse{\pgfmathresult-#1}\fi
-    },
-    y filter/.append code={%
-      \ifx\pgfmathresult\empty\else\pgfmathparse{\pgfmathresult-#2}\fi
-    },
-    xticklabel=\pgfmathparse{\tick+#1}\pgfmathprintnumber{\pgfmathresult},
-    yticklabel=\pgfmathparse{\tick+#2}\pgfmathprintnumber{\pgfmathresult}
-  }
-}
+%\pgfplotsset{%
+%  axis line origin/.style args={#1,#2}{%
+%    x filter/.append code={ % Check for empty or filtered out numbers
+%      \ifx\pgfmathresult\empty\else\pgfmathparse{\pgfmathresult-#1}\fi
+%    },
+%    y filter/.append code={%
+%      \ifx\pgfmathresult\empty\else\pgfmathparse{\pgfmathresult-#2}\fi
+%    },
+%    xticklabel=\pgfmathparse{\tick+#1}\pgfmathprintnumber{\pgfmathresult},
+%    yticklabel=\pgfmathparse{\tick+#2}\pgfmathprintnumber{\pgfmathresult}
+%  }
+%}
 

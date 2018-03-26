@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     tikz macros etc.
 %
-% DATE     18.02.2018
+% DATE     20.03.2018
 % OWNER    Bischofberger
 % ==================================================================
 
@@ -27,8 +27,8 @@
 {%
   tikzStyle/.is family, /tikzStyle,
   default/.style={node text=, node pos=, angle radius=5mm, color=black},
-  node text/.estore in=\tikzStyleNoteText,
-  node pos/.estore in=\tikzStyleNotePos,
+  node text/.estore in=\tikzStyleNodeText,
+  node pos/.estore in=\tikzStyleNodePos,
   angle radius/.estore in=\tikzStyleAngleRad,
   color/.estore in=\tikzStyleColor
 }
@@ -47,10 +47,13 @@
 {%
   \pgfkeys{/tikzStyle, default, #1}%
   \draw[fill, color=\tikzStyleColor] (#2) 
-    node[circle,fill, inner sep=1.3pt] {}
-    node[\tikzStyleNotePos] {\tikzStyleNoteText};
+    node[circle,fill,inner sep=0pt,outer sep=0pt,minimum size=3pt] {}
+    %node[circle,fill, inner sep=1.3pt] {}
+    node[\tikzStyleNodePos] {\tikzStyleNodeText};
 }
 
-% nicer arrow tip default
-\tikzset{>={Triangle[angle=45:3pt 5]}}
+\tikzset{%
+  >={Triangle[angle=45:3pt 5]},  % nicer arrow tip
+  mark coordinate/.style={inner sep=0pt,outer sep=0pt,minimum size=3pt, fill=black,circle}%
+}
 
