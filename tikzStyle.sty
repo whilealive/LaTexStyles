@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     tikz macros etc.
 %
-% DATE     26.03.2018
+% DATE     12.04.2018
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -54,13 +54,11 @@
 {%
   \pgfkeys{/tikzStyle, default, #1}%
   \draw[fill, color=\tikzStyleColor] (#2) 
-    node[circle,fill,inner sep=0pt,outer sep=0pt,minimum size=3pt] {}
-    %node[circle,fill, inner sep=1.3pt] {}
+    node[inner sep=0pt,outer sep=0pt,minimum size=3pt,fill=black,circle] {}
     node[\tikzStyleNodePos] {\tikzStyleNodeText};
 }
 
 \tikzset{%
   >={Triangle[angle=45:3pt 5]},  % nicer arrow tip
-  mark coordinate/.style={inner sep=0pt,outer sep=0pt,minimum size=3pt, fill=black,circle}%
 }
 
