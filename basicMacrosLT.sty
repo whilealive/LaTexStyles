@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     26.03.2018
+% DATE     25.04.2018
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -150,6 +150,7 @@
 % Theorems
 \newenvironment{Bsp}{\SpaceAbove\BZ\noindent\textbf{Beispiel\enspace}}{\SpaceBelow}
 \newenvironment{Def}{\SpaceAbove\BZ\noindent\textbf{Definition\enspace}}{\SpaceBelow}
+\newenvironment{Formula}{\SpaceAbove\BZ\noindent\textbf{Formel\enspace}}{\SpaceBelow}
 \newenvironment{Bem}{\SpaceAbove\BZ\noindent\textbf{Bemerkung\enspace}}{\SpaceBelow}
 \newenvironment{Zus}{\SpaceAbove\BZ\noindent\textbf{Zusammenfassung\enspace}}{\SpaceBelow}
 \newenvironment{Sol}{\SpaceAbove\BZ\noindent\textit{Lösung\enspace}}{\SpaceBelow}
@@ -162,6 +163,15 @@
     \begin{Def}
 }{%
     \end{Def}
+  \end{mdframed}
+  \DoNotAddBlank
+}
+\NewDocumentEnvironment{FrameFormula}{}
+{%
+  \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=1pt,innerbottommargin=0pt]
+    \begin{Formula}
+}{%
+    \end{Formula}
   \end{mdframed}
   \DoNotAddBlank
 }
