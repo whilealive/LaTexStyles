@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     collection of tikz macros
 %
-% DATE     26.03.2018
+% DATE     23.04.2018
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -60,3 +60,14 @@
   \coordinate (#5) at ($(#2)+(\cx pt,\cy pt)$);
 }
 % -----------------------
+
+
+\newcommand*{\Einheitskreis}[1][1.0]{%
+  \begin{tikzpicture}[scale=#1]
+    \draw (0,0) circle (5);
+    \draw[->] (-6,0) -- (6,0) node[right] {$x$};
+    \draw[->] (0,-6) -- (0,6) node[right] {$y$};
+    \Point[node text={$(1,0)$},node pos=above right] {5,0}
+    \Point[node text={$(0,1)$},node pos=above left] {0,5}
+  \end{tikzpicture}
+}
