@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     tikz macros etc.
 %
-% DATE     12.04.2018
+% DATE     25.05.2018
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -33,11 +33,12 @@
 \pgfkeys
 {%
   tikzStyle/.is family, /tikzStyle,
-  default/.style={node text=, node pos=, angle radius=5mm, color=black},
+  default/.style={node text=, node pos=, angle radius=5mm, color=black, fill=none},
   node text/.estore in=\tikzStyleNodeText,
   node pos/.estore in=\tikzStyleNodePos,
   angle radius/.estore in=\tikzStyleAngleRad,
-  color/.estore in=\tikzStyleColor
+  color/.estore in=\tikzStyleColor,
+  fill/.estore in=\tikzStyleFill
 }
 
 % right angle, german style
@@ -45,7 +46,7 @@
 \newcommand*{\RechterWinkel}[2][]
 {%
   \pgfkeys{/tikzStyle, default, #1}%
-  \draw pic[pic text=., draw, angle radius=\tikzStyleAngleRad, angle eccentricity=.55, color=\tikzStyleColor] {angle=#2};
+  \draw pic[pic text=., draw, angle radius=\tikzStyleAngleRad, angle eccentricity=.55, color=\tikzStyleColor, fill=\tikzStyleFill] {angle=#2};
 }
 
 % Point that won't get scaled
