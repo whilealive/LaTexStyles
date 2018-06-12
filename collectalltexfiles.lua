@@ -12,10 +12,9 @@
 -- DATE     12.06.2018
 -- OWNER    Bischofberger
 -- ==================================================================
---
--- FIXME: filenames are not sorted...
 
-
+-- dirtree iterator:
+-- to be found at: http://lua-users.org/wiki/DirTreeIterator
 function dirtree(dir)
   if string.sub(dir, -1) == "/" then
     dir=string.sub(dir, 1, -2)
@@ -55,11 +54,21 @@ end
 
 
 function CollectAllTexFiles(dir)
+  -- Lua doesn't guarantee any iteration order for the associative part of the table!
+  -- Therefore, we must order the entries manually
+  local filenames = {}
+
   for i in dirtree(dir) do
     local filename = i:gsub(".*/([^/]+)$","%1")
     if isValidTexFile(filename) then
-      --tex.sprint(filename .. "\\BZ")
-      tex.sprint("[" .. filename .. "]\\BZ" .. "\\input " .. dir ..  filename .. " " .. "\\clearpage\\par")
+      table.insert(filenames, filename)
     end
+  end
+
+  table.sort(filenames)
+
+  for i = 1, #filenames do
+    tex.sprint("[" .. filenames[i] .. "]\\BZ" .. "\\input " .. dir .. filenames[i] .. " " .. "\\clearpage\\par")
+    --tex.sprint(dir .. filenames[i] .. "\\BZ")  -- debugging
   end
 end
