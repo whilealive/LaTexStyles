@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     02.07.2018
+% DATE     03.07.2018
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -36,6 +36,13 @@
 
 % fill page from bottom to top
 \newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
+
+% add an extra empty page if total page number is odd (two-column not supported!)
+\newcommand*{\cleartoleftpage}{%
+  \clearpage\ifodd\value{page}\else%
+    \thispagestyle{empty}\hbox{}\newpage%
+  \fi%
+}
 
 % Struts for added vertical spacing in tabular environments
 % Insert struts directly in nominator/denominator/sub-/superscripts of fractions/sums etc.!
