@@ -53,10 +53,8 @@
 % args: #1 = optional key-value (node text / node pos), #2 = coordinates
 \newcommand*{\Point}[2][]
 {%
-  \pgfkeys{/tikzStyle, default, #1}%
-  \draw[fill, color=\tikzStyleColor] (#2) 
-    node[inner sep=0pt,outer sep=0pt,minimum size=3pt,fill=black,circle] {}
-    node[\tikzStyleNodePos] {\tikzStyleNodeText};
+  \pgfkeys{/tikzStyle, default, fill=black, #1}%
+  \draw[fill] (#2) node[inner sep=0pt,outer sep=0pt,minimum size=3pt,draw=\tikzStyleColor,fill=\tikzStyleFill,circle] {} node[\tikzStyleNodePos] {\tikzStyleNodeText};
 }
 
 \tikzset{%
