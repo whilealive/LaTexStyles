@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     pgfplots macros etc.
 %
-% DATE     26.03.2018
+% DATE     24.07.2018
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -19,17 +19,8 @@
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=newest}
 
-% set axis origin as: "axis line origin={-1,0},"
-%\pgfplotsset{%
-%  axis line origin/.style args={#1,#2}{%
-%    x filter/.append code={ % Check for empty or filtered out numbers
-%      \ifx\pgfmathresult\empty\else\pgfmathparse{\pgfmathresult-#1}\fi
-%    },
-%    y filter/.append code={%
-%      \ifx\pgfmathresult\empty\else\pgfmathparse{\pgfmathresult-#2}\fi
-%    },
-%    xticklabel=\pgfmathparse{\tick+#1}\pgfmathprintnumber{\pgfmathresult},
-%    yticklabel=\pgfmathparse{\tick+#2}\pgfmathprintnumber{\pgfmathresult}
-%  }
-%}
-
+\usetikzlibrary{arrows.meta}
+\pgfplotsset{%
+  axis lines=center,%
+  axis line style={-Latex},%
+}

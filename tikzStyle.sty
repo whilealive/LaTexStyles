@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     tikz macros etc.
 %
-% DATE     23.07.2018
+% DATE     24.07.2018
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -33,7 +33,7 @@
 \pgfkeys
 {%
   tikzStyle/.is family, /tikzStyle,
-  default/.style={node text=, node pos=, angle radius=5mm, color=black, fill=none},
+  default/.style={node text=, node pos=, angle radius=5mm, color=black, fill=black},
   node text/.estore in=\tikzStyleNodeText,
   node pos/.estore in=\tikzStyleNodePos,
   angle radius/.estore in=\tikzStyleAngleRad,
@@ -45,19 +45,18 @@
 % \RechterWinkel[]{A--B--C};
 \newcommand*{\RechterWinkel}[2][]
 {%
-  \pgfkeys{/tikzStyle, default, #1}%
+  \pgfkeys{/tikzStyle, default, fill=none, #1}%
   \draw pic[pic text=., draw, angle radius=\tikzStyleAngleRad, angle eccentricity=.55, color=\tikzStyleColor, fill=\tikzStyleFill] {angle=#2};
 }
 
 % Point that won't get scaled
-% args: #1 = optional key-value (node text / node pos), #2 = coordinates
-\newcommand*{\Point}[2][]
+\tikzset{point/.style={circle,inner sep=0pt,outer sep=0pt,minimum size=3pt,draw=black,fill=black}}
+\newcommand*{\Point}[2][] % args: #1 = optional key-value (see above), #2 = coordinates
 {%
   \pgfkeys{/tikzStyle, default, fill=black, #1}%
-  \draw[fill] (#2) node[inner sep=0pt,outer sep=0pt,minimum size=3pt,draw=\tikzStyleColor,fill=\tikzStyleFill,circle] {} node[\tikzStyleNodePos] {\tikzStyleNodeText};
+  \draw[fill] (#2) node[point,draw=\tikzStyleColor,fill=\tikzStyleFill] {} node[\tikzStyleNodePos] {\tikzStyleNodeText};
 }
 
-\tikzset{%
-  >={Triangle[angle=45:4pt 5]},  % nicer arrow tip
-}
+% nicer arrow tip
+\tikzset{>={Latex}}
 
