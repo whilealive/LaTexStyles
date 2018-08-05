@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     collection of tikz macros
 %
-% DATE     23.04.2018
+% DATE     05.08.2018
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -16,6 +16,9 @@
 
 \ProvidesPackage{tikzCollection}
 
+
+% ==================================================================
+% construct w-s-w (angle-edge-angle-triangle)
 % Since \pgfgetlastxy returns pt, all the computations here are done in pt. This means, 
 % the arguments of \WSW{}{}{}{}{} have to be in pt only.
 % -----------------------
@@ -59,9 +62,10 @@
   \pgfmathsetmacro{\cy}{\ACLength*((\SinAlpha*\XCoord) + ( \CosAlpha*\YCoord))};
   \coordinate (#5) at ($(#2)+(\cx pt,\cy pt)$);
 }
-% -----------------------
 
 
+% ==================================================================
+% unit circle
 \newcommand*{\Einheitskreis}[1][1.0]{%
   \begin{tikzpicture}[scale=#1]
     \draw (0,0) circle (5);
@@ -71,3 +75,46 @@
     \Point[node text={$(0,1)$},node pos=above left] {0,5}
   \end{tikzpicture}
 }
+
+
+% ==================================================================
+% recursively draw a Pythagoras Tree fractal
+% Author: Timo Bingmann <tb@panthema.net>, 2013-06-27
+% \PythagorasTree{levels}{angle}
+\newcommand{\PythagorasTree}[2]{%
+  \ifnum#1=0\else
+    % randomly pick a color, prefer green and blue shades
+    %\pgfmathsetmacro{\r}{0.6*rnd}
+    %\pgfmathsetmacro{\g}{0.9*rnd}
+    %\pgfmathsetmacro{\b}{0.7*rnd}
+    %\definecolor{MyColor}{rgb}{\r,\g,\b}
+
+    % draw the rectangle of this level
+    %\draw[draw=MyColor] (0,0) rectangle (1,1);
+    \draw[fill=black] (0,0) rectangle (1,1);
+
+    % decrement level counter
+    \pgfmathtruncatemacro{\next}{#1-1}
+
+    % transform scope for left branch: move origin (1cm,0cm), rotate and scale
+    % with the length of the left cathetus.
+    \begin{scope}[
+      yshift=1cm,xshift=0cm,
+      rotate=#2,scale={cos(#2)}
+      ]
+      \PythagorasTree{\next}{#2}
+    \end{scope}
+
+    % now for the tricks: transform scope for right branch: move origin to the
+    % top point of the triangle, rotate reverse and scale with length of right
+    % cathetus.
+    \begin{scope}[
+      yshift={1cm * (1 + sin(#2)*cos(#2))},
+      xshift={1cm * (cos(#2)*cos(#2))},
+      rotate={#2-90},scale={sin(#2)}
+      ]
+      \PythagorasTree{\next}{#2}
+    \end{scope}
+  \fi
+}
+
