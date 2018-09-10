@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     13.07.2018
+% DATE     10.09.2018
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -73,6 +73,11 @@
 \setlist[myenum,1,2]{label=\arabic*.,leftmargin=*,nosep,align=left}
 \setlist[myitem,1,2]{label=--,leftmargin=*,nosep,align=left}
 \setlist[alphenum,1,2]{label=\alph*),leftmargin=*,nosep,align=left,widest=a}  % manually set "widest=m" if list is long
+
+% checklist
+\newcommand*{\checkbox}{\fboxsep=-.15pt\fbox{\rule{0pt}{1.4ex}\rule{1.4ex}{0pt}}}
+\newlist{checklist}{itemize}{2}
+\setlist[checklist,1,2]{label=\checkbox,leftmargin=*,nosep,align=left}
 
 % ----------
 % tabbedenum: horizontal alphanumeric lists (for exercises)
