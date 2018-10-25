@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Notes...
 %
-% DATE     26.03.2018
+% DATE     25.10.2018
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -20,19 +20,23 @@
 
 % key handling
 \newif\ifmyNotesExact
+\newif\ifmyNotesDebug
+
 \pgfkeys
 {%
   mynotes/.is family, /mynotes,
-  default/.style={space-above=1ex,space-below=0.3ex,square-size=4mm,exact=false},
+  default/.style={space-above=1ex,space-below=0.3ex,square-size=4mm,exact=false,debug=false},
   space-above/.estore in=\myNotesSpaceAbove,
   space-below/.estore in=\myNotesSpaceBelow,
   square-size/.estore in=\myNotesSquareSize,
-  exact/.is if=myNotesExact
+  exact/.is if=myNotesExact,
+  debug/.is if=myNotesDebug
 }
 
-% common computations
+
+% internal: compute width of squares
 %
-\newcommand*{\ComputeSizeOfSquares}
+\def\@ComputeSizeOfSquares
 {%
   \ifmyNotesExact
     \pgfmathparse{\myNotesSquareSize}%
@@ -47,10 +51,38 @@
   \fi
 }
 
-% measure space remaining on a page
+% internal: compute total notes height for \FillNotes
+%
+\def\@ComputeTotalNotesHeight
+{%
+  \@ComputeSizeOfSquares%
+  \pgfmathparse{int(\@Measurepage/\sizeOfSquares-0.015)}\xdef\numberOfRows{\pgfmathresult}%
+  \pgfmathparse{\numberOfRows * \sizeOfSquares pt}\xdef\maxnotesheight{\pgfmathresult}
+}
+
+
+% internal: measure space remaining on a page
 % http://tex.stackexchange.com/questions/14512/how-to-define-a-figure-size-so-that-it-consumes-the-rest-of-a-page
 %
 \def\@Measurepage{\dimexpr\textheight-\pagetotal-2\pgflinewidth\relax}
+
+
+% internal: print all involved sizes (for \FillNotes command)
+%
+\def\@PrintFillNotesDebuggingInformation
+{%
+  \ifmyNotesDebug
+    \draw (0,0) node[above right,align=left] 
+    {%
+      textheight: \convertto{mm}{\textheight}\\
+      pagetotal: \convertto{mm}{\pagetotal}\\
+      pgflinewidth: \the\pgflinewidth\\
+      size of squares: \convertto{mm}{\sizeOfSquares pt}\\
+      \pgfmathparse{\@Measurepage/\sizeOfSquares} Measurepage/sizeOfSquares: \pgfmathresult pt\\
+      \pgfmathparse{int(\@Measurepage/\sizeOfSquares)} same as int (number of rows): \pgfmathresult%
+    };
+  \fi
+}
 
 
 % Notes[space above=1ex,space below=0.3ex,square size=4mm]{10}
@@ -61,7 +93,7 @@
   \pgfkeys{/mynotes, default, #1}%
   \vskip\myNotesSpaceAbove\par
   \begin{tikzpicture}[scale=1]%
-    \ComputeSizeOfSquares%
+    \@ComputeSizeOfSquares%
     \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!]%
       (0,0) grid (\myLineWidth pt, {#2 * \sizeOfSquares pt});%
   \end{tikzpicture}%
@@ -70,17 +102,21 @@
 
 % \FillNotes[space above=1ex,square size=4mm]
 % args: #1: options
+% comment: To define a bounding box with the same size as the grid makes the vertical filling
+%          much more robust. In rare cases (approx. 0.01 difference) the command fails and puts
+%          the grid on a new page. See \@ComputeTotalNotesHeight how this has been handeled
+%          by some small correction.
 %
 \newcommand*{\FillNotes}[1][]
 {%
   \pgfkeys{/mynotes, default, #1}%
   \vskip\myNotesSpaceAbove\par  % \par is needed for the correct value of \@Measurepage
   \begin{tikzpicture}%
-    \ComputeSizeOfSquares%
-    \pgfmathparse{int(\@Measurepage/\sizeOfSquares)}%
-    \xdef\numberOfRows{\pgfmathresult}%
+    \@ComputeTotalNotesHeight
+    \path[use as bounding box] (0,0) rectangle (\myLineWidth pt,\maxnotesheight pt);
     \draw [line cap=rect, step=\sizeOfSquares pt, gray!50!]%
-      (0,0) grid (\myLineWidth pt, {\numberOfRows * \sizeOfSquares pt});%
+      (0,0) grid (\myLineWidth pt, \maxnotesheight pt);%
+    \@PrintFillNotesDebuggingInformation
   \end{tikzpicture}%
   \clearpage
 }
