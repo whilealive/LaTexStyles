@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     collection of extended pgfplots macros
 %
-% DATE     26.03.2018
+% DATE     08.01.2019
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -16,28 +16,3 @@
 
 \ProvidesPackage{pgfplotsCollection}
 
-% Standard Graph
-\newcommand*{\SetGraphDimensions}[5]
-{%
-  \pgfmathsetmacro{\Width}{#1}
-  \pgfmathsetmacro{\Xmin}{#2}
-  \pgfmathsetmacro{\Xmax}{#3}
-  \pgfmathsetmacro{\Ymin}{#4}
-  \pgfmathsetmacro{\Ymax}{#5}
-  \pgfmathsetmacro{\UnitVectorLength}{\Width/(\Xmax-\Xmin+1)}
-}
-\pgfplotsset{StandardGraphStyle/.style={%
-  xmin=\Xmin, xmax=\Xmax, ymin=\Ymin, ymax=\Ymax,
-  domain=\Xmin:\Xmax,
-  restrict y to domain=\Ymin:\Ymax,
-  x=\UnitVectorLength, y=\UnitVectorLength,
-  samples=200,
-  axis lines=center,
-  axis line style={shorten >=-.5*\UnitVectorLength, shorten <=-.5*\UnitVectorLength},
-  xlabel style={above=2pt,at={(ticklabel* cs:1.0)},fill=white},
-  ylabel style={right=2pt,at={(ticklabel* cs:1.0)},fill=white},
-  xlabel={$x$}, ylabel={$y$},
-  xtick distance=1, ytick distance=1,
-  grid=major,%
-  }%
-}
