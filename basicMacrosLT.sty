@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     10.09.2018
+% DATE     31.01.2019
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -126,8 +126,9 @@
 %
 % ----------
 
-% for math exercises...
+% for math exercises
 \newcommand{\Result}[1]{\underline{\underline{#1\rule[-0.6ex]{0pt}{0pt}}}}
+\newcommand{\ResultBelow}[1]{\makebox[0pt][l]{\Result{\phantom{#1}}}}  % usable in align-env.
 \newcommand*{\Checkbox}{\tikz \draw (0,0) rectangle (1.5ex,1.5ex);}
 
 % fracs, sqrts, etc.
