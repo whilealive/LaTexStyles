@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     10.02.2019
+% DATE     13.02.2019
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -111,7 +111,7 @@
     \IfNoValueF{#1}{\keys_set:nn{basicMacros/tabbedenum}{#1}}
     \par\vskip \l__basicMacros_SpaceAbove_tl
     \NumTabs{#2}
-    \begin{minipage}[t]{\textwidth}
+    \begin{minipage}[t]{\linewidth}
       \linespread{\l__basicMacros_LineSpacing_tl}\selectfont
       \begin{enumerate*}[label=\l__basicMacros_Label_tl,itemjoin={\tab}]%
 }{%
