@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     13.02.2019
+% DATE     26.03.2019
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -69,9 +69,11 @@
 \RequirePackage[inline]{enumitem}
 \newlist{myenum}{enumerate}{2}
 \newlist{myitem}{itemize}{2}
+\newlist{mydotitem}{itemize}{2}
 \newlist{alphenum}{enumerate}{2}
 \setlist[myenum,1,2]{label=\arabic*.,leftmargin=*,nosep,align=left}
 \setlist[myitem,1,2]{label=--,leftmargin=*,nosep,align=left}
+\setlist[mydotitem,1,2]{label=\bullet,leftmargin=*,nosep,align=left}
 \setlist[alphenum,1,2]{label=\alph*),leftmargin=*,nosep,align=left,widest=a}  % manually set "widest=m" if list is long
 
 % checklist
