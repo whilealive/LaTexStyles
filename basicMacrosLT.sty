@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     26.03.2019
+% DATE     12.04.2019
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -73,8 +73,11 @@
 \newlist{alphenum}{enumerate}{2}
 \setlist[myenum,1,2]{label=\arabic*.,leftmargin=*,nosep,align=left}
 \setlist[myitem,1,2]{label=--,leftmargin=*,nosep,align=left}
-\setlist[mydotitem,1,2]{label=\bullet,leftmargin=*,nosep,align=left}
+\newcommand{\localtextbulletone}{\textcolor{gray}{\raisebox{.3ex}{\rule{.7ex}{.7ex}}}}
+\setlist[mydotitem,1,2]{label=\localtextbulletone,leftmargin=*,nosep,align=left}
 \setlist[alphenum,1,2]{label=\alph*),leftmargin=*,nosep,align=left,widest=a}  % manually set "widest=m" if list is long
+
+
 
 % checklist
 \newcommand*{\checkbox}{\fboxsep=-.15pt\fbox{\rule{0pt}{1.4ex}\rule{1.4ex}{0pt}}}
