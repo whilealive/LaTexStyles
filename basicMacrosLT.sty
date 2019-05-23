@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     11.05.2019
+% DATE     21.05.2019
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -169,6 +169,7 @@
 \newenvironment{Def}{\SpaceAbove\BZ\noindent\textbf{Definition\enspace}}{\SpaceBelow}
 \newenvironment{Bem}{\SpaceAbove\BZ\noindent\textbf{Bemerkung\enspace}}{\SpaceBelow}
 \newenvironment{Faz}{\SpaceAbove\BZ\noindent\textbf{Fazit\enspace}}{\SpaceBelow}
+\newenvironment{Thm}{\SpaceAbove\BZ\noindent\textbf{Satz\enspace}}{\SpaceBelow}
 \newenvironment{Sol}{\SpaceAbove\BZ\noindent\textit{Lösung\enspace}}{\SpaceBelow}
 
 % definition frame
@@ -182,12 +183,12 @@
   \end{mdframed}
   \DoNotAddBlank
 }
-\NewDocumentEnvironment{FrameFormula}{}
+\NewDocumentEnvironment{FrameThm}{}
 {%
   \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=0pt,innerbottommargin=0pt]
-    \begin{Formula}
+    \begin{Thm}
 }{%
-    \end{Formula}
+    \end{Thm}
   \end{mdframed}
   \DoNotAddBlank
 }
