@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     21.05.2019
+% DATE     18.06.2019
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -52,6 +52,9 @@
 % unit conversion: \convertto{mm}{25}
 % % pt, mm, cm, ex, em, bp, dd, pc, in
 \def\convertto#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1\relax#1}
+
+% CHF unit (swiss francs)
+\newcommand*{\CHF}[1]{CHF~$\num{#1}.-$}
 
 % tables
 \RequirePackage{booktabs}
