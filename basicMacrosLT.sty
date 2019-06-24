@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     18.06.2019
+% DATE     24.06.2019
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -134,7 +134,7 @@
 % ----------
 
 % for math exercises
-\newcommand{\Result}[1]{\underline{\underline{#1\rule[-0.6ex]{0pt}{0pt}}}}
+\newcommand{\Result}[2][0ex]{\underline{\underline{#2\rule[-0.6ex-#1]{0pt}{0pt}}}}
 \newcommand{\ResultBelow}[1]{\makebox[0pt][l]{\Result{\phantom{#1}}}}  % usable in align-env.
 
 % fracs, sqrts, etc.
