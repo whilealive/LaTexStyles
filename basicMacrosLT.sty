@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     13.08.2019
+% DATE     23.08.2019
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -129,18 +129,49 @@
     \par\vspace{\l__basicMacros_SpaceBelow_tl}
   \group_end:
 }
+
+
+% ----------
+% myfrac: modifiable fractions
+%
+% keys
+\ExplSyntaxOn
+\keys_define:nn{basicMacros/myfrac}
+{%
+  line-width        .tl_set:N = \l__basicMacros_LineWidth_tl,%
+  raise-numerator   .tl_set:N = \l__basicMacros_RaiseNumerator_tl,%
+  lower-denumerator .tl_set:N = \l__basicMacros_LowerDenumerator_tl,%
+  line-width        .value_required:n = true,%
+  raise-numerator   .value_required:n = true,%
+  lower-denumerator .value_required:n = true,%
+  line-width        .initial:n = {},%
+  raise-numerator   .initial:n = {0pt},%
+  lower-denumerator .initial:n = {0pt}%
+}%
+
+\NewDocumentCommand{\myfrac}{ o m m }{%
+  \IfNoValueF{#1}{\keys_set:nn{basicMacros/myfrac}{#1}}%
+  \tl_if_empty:NTF{\l__basicMacros_LineWidth_tl}%
+    {%
+      \genfrac{}{}{}{0}%
+      {\raisebox{\l__basicMacros_RaiseNumerator_tl}{$#2$}}%
+      {\raisebox{-\l__basicMacros_LowerDenumerator_tl}{$#3$}}%
+    }%
+    {%
+      \genfrac{}{}{\l__basicMacros_LineWidth_tl}{0}%
+      {\raisebox{\l__basicMacros_RaiseNumerator_tl}{$#2$}}%
+      {\raisebox{-\l__basicMacros_LowerDenumerator_tl}{$#3$}}%
+    }%
+}%
 \ExplSyntaxOff
 %
 % ----------
 
-% for math exercises
+% double-underline
 \newcommand{\Result}[2][0ex]{\underline{\underline{#2\rule[-0.6ex-#1]{0pt}{0pt}}}}
 \newcommand{\ResultBelow}[2][0ex]{\makebox[0pt][l]{\Result[#1]{\phantom{#2}}}}  % usable in align-env. -> for template see snippy
 
-% fracs, sqrts, etc.
-\NewDocumentCommand{\myfrac}{ m m O{} O{0pt} O{0pt} }{%
-  \genfrac{}{}{#3}{0}{\raisebox{#4}{$#1$}}{\raisebox{-#5}{$#2$}}
-}  % nested fractions: \myfrac{x}{y}[1pt][1ex][1ex]
+% sqrt
 \newcommand*{\NthRoot}[2]{\sqrt[\leftroot{0}\uproot{0}\scriptstyle #1]{#2}}
 
 % absolute value
