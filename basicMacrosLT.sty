@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Macro collection (LuaLaTeX)
 %
-% DATE     23.08.2019
+% DATE     05.11.2019
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -196,9 +196,12 @@
 % sets (logic)
 \newcommand*{\Logic}[1]{\textsf{\textbf{#1}}}
 
-% radiant angle: frown above (coult be improved...)
+% radiant angle: frown above (could be improved...)
 \newcommand*\Radiant[2][\textstyle]{\ensuremath{%
   \kern-.7em\array[b]{c}\text{\scalebox{1.6}{$#1\frown$}}\\[-1.8ex]#1#2\endarray}\kern-0.8em}
+
+% cancel stuff (reduce fractions)
+\usepackage[makeroom]{cancel}
 
 % Theorems
 \newenvironment{Bsp}{\SpaceAbove\BZ\noindent\textbf{Beispiel\enspace}}{\SpaceBelow}
