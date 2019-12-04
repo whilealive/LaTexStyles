@@ -1,0 +1,150 @@
+% ==================================================================
+% FILE     myMacrosMath.sty
+% MACHINE  all
+% INFO     Mathematical macro collection (LuaLaTeX)
+%
+% DATE     04.12.2019
+% OWNER    Bischofberger
+% ==================================================================
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+
+\ProvidesPackage{myMacrosMath}
+
+% ----------
+% myfrac: modifiable fractions
+%
+% keys
+\ExplSyntaxOn
+\keys_define:nn{basicMacros/myfrac}
+{%
+  line-width        .tl_set:N = \l__basicMacros_LineWidth_tl,%
+  raise-numerator   .tl_set:N = \l__basicMacros_RaiseNumerator_tl,%
+  lower-denumerator .tl_set:N = \l__basicMacros_LowerDenumerator_tl,%
+  line-width        .value_required:n = true,%
+  raise-numerator   .value_required:n = true,%
+  lower-denumerator .value_required:n = true,%
+  line-width        .initial:n = {},%
+  raise-numerator   .initial:n = {0pt},%
+  lower-denumerator .initial:n = {0pt}%
+}%
+
+\NewDocumentCommand{\myfrac}{ o m m }{%
+  \IfNoValueF{#1}{\keys_set:nn{basicMacros/myfrac}{#1}}%
+  \tl_if_empty:NTF{\l__basicMacros_LineWidth_tl}%
+    {%
+      \genfrac{}{}{}{0}%
+      {\raisebox{\l__basicMacros_RaiseNumerator_tl}{$#2$}}%
+      {\raisebox{-\l__basicMacros_LowerDenumerator_tl}{$#3$}}%
+    }%
+    {%
+      \genfrac{}{}{\l__basicMacros_LineWidth_tl}{0}%
+      {\raisebox{\l__basicMacros_RaiseNumerator_tl}{$#2$}}%
+      {\raisebox{-\l__basicMacros_LowerDenumerator_tl}{$#3$}}%
+    }%
+}%
+\ExplSyntaxOff
+%
+% ----------
+
+% double-underline
+\newcommand{\Result}[2][0ex]{\underline{\underline{#2\rule[-0.6ex-#1]{0pt}{0pt}}}}
+\newcommand{\ResultBelow}[2][0ex]{\makebox[0pt][l]{\Result[#1]{\phantom{#2}}}}  % usable in align-env. -> for template see snippy
+
+% sqrt
+\newcommand*{\NthRoot}[2]{\sqrt[\leftroot{0}\uproot{0}\scriptstyle #1]{#2}}
+
+% absolute value
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+
+% sets and constants
+\newcommand*{\N}{\ensuremath{\mathbb{N}}}
+\newcommand*{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand*{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand*{\R}{\ensuremath{\mathbb{R}}}
+\newcommand*{\C}{\ensuremath{\mathbb{C}}}
+\newcommand*{\Euler}{\ensuremath{\mathrm{e}}}
+\newcommand*{\Complex}{\ensuremath{i}}
+\newcommand*{\D}[1]{\ensuremath{\mathrm{d}#1}}  % dx, dy...
+\DeclareMathOperator{\GGT}{ggT}
+\DeclareMathOperator{\KGV}{kgV}
+\DeclareMathOperator{\Mean}{E}  % mean (stochastics)
+\DeclareMathOperator{\Var}{Var} % variance (stochastics)
+\newcommand*{\HalfLife}{\ensuremath{T_{1/2}}}  % Halbwertszeit
+\newcommand*{\VV}[1]{\ensuremath{\overrightarrow{#1}}}  % vectors...
+
+% sets (logic)
+\newcommand*{\Logic}[1]{\textsf{\textbf{#1}}}
+
+% radiant angle: frown above (could be improved...)
+\newcommand*\Radiant[2][\textstyle]{\ensuremath{%
+  \kern-.7em\array[b]{c}\text{\scalebox{1.6}{$#1\frown$}}\\[-1.8ex]#1#2\endarray}\kern-0.8em}
+
+% cancel stuff (reduce fractions)
+\RequirePackage[makeroom]{cancel}
+
+% Theorems
+\newenvironment{Bsp}{\SpaceAbove\BZ\noindent\textbf{Beispiel\enspace}}{\SpaceBelow}
+\newenvironment{Def}{\SpaceAbove\BZ\noindent\textbf{Definition\enspace}}{\SpaceBelow}
+\newenvironment{Bem}{\SpaceAbove\BZ\noindent\textbf{Bemerkung\enspace}}{\SpaceBelow}
+\newenvironment{Faz}{\SpaceAbove\BZ\noindent\textbf{Fazit\enspace}}{\SpaceBelow}
+\newenvironment{Thm}{\SpaceAbove\BZ\noindent\textbf{Satz\enspace}}{\SpaceBelow}
+\newenvironment{Sol}{\SpaceAbove\BZ\noindent\textit{Lösung\enspace}}{\SpaceBelow}
+
+% definition frame
+\RequirePackage[xcolor]{mdframed}
+\NewDocumentEnvironment{FrameDef}{}
+{%
+  \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=0pt,innerbottommargin=0pt]
+    \begin{Def}
+}{%
+    \end{Def}
+  \end{mdframed}
+  \DoNotAddBlank
+}
+\NewDocumentEnvironment{FrameThm}{}
+{%
+  \begin{mdframed}[nobreak,linecolor=gray!40!,linewidth=2pt,innertopmargin=0pt,innerbottommargin=0pt]
+    \begin{Thm}
+}{%
+    \end{Thm}
+  \end{mdframed}
+  \DoNotAddBlank
+}
+
+
+% ----------------------------------------------------------------
+% all about Exercises...
+% ----------------------------------------------------------------
+\newcounter{excounter}
+\renewcommand*{\theexcounter}{\arabic{excounter}}
+
+\newenvironment{AufgLsg}[1]{% adds label for solution -> see LsgAufg
+  \refstepcounter{excounter}%
+  \SpaceAbove%
+  \label{#1}%
+  \BZ\noindent\textbf{Aufgabe~\theexcounter\enspace}%
+}{\SpaceBelow}
+
+\newenvironment{Aufg}[1][\theexcounter]{% normal
+  \ifx\theexcounter#1\refstepcounter{excounter}\fi%
+  \SpaceAbove%
+  \BZ\noindent\textbf{Aufgabe~#1\enspace}%
+}{\SpaceBelow}
+
+\newenvironment{Aufg*}[1][\theexcounter]{% difficult
+  \ifx\theexcounter#1\refstepcounter{excounter}\fi%
+  \SpaceAbove%
+  \BZ\noindent\textbf{Aufgabe~#1*\enspace}%
+}{\SpaceBelow}
+
+% solution of a single exercise
+\newenvironment{LsgAufg}[1]{%
+  \textbf{Aufg. \ref{#1} }%
+}{\par\addvspace{.5\baselineskip}}
+

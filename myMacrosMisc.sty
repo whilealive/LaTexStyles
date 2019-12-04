@@ -1,0 +1,132 @@
+% ==================================================================
+% FILE     myMacrosMisc.sty
+% MACHINE  all
+% INFO     Miscellaneous macro collection (LuaLaTeX)
+%
+% DATE     04.12.2019
+% OWNER    Bischofberger
+% ==================================================================
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+
+\ProvidesPackage{myMacrosMisc}
+
+% ----------------------------------------------------------------
+% local helper makros
+% ----------------------------------------------------------------
+% http://tex.stackexchange.com/questions/204699/smaller-vertical-space-between-repeated-environments
+\def\@NoBlankPenalty{12345}  % do not add vertical space at \MySkippingPenalty
+\newcommand*{\DoNotAddBlank}{\penalty\@NoBlankPenalty}
+\newcommand*{\SpaceAbove}{\ifnum\lastpenalty=\@NoBlankPenalty\vskip-\baselineskip\penalty0\fi}
+\newlength{\AfterSkip}
+\setlength{\AfterSkip}{\baselineskip}
+\newcommand*{\SpaceBelow}{\par\addvspace{\AfterSkip}\DoNotAddBlank}
+
+
+% ----------------------------------------------------------------
+% custom commands and environments...
+% ----------------------------------------------------------------
+\newcommand*{\BZ}[1][1]{\vskip #1\baselineskip}  % 1 Blindzeile
+\newcommand*{\hBZ}{\BZ[.5]}                      % 1/2 Blindzeile
+
+% fill page from bottom to top
+\newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
+
+% add an extra empty page if total page number is odd (two-column not supported!)
+\newcommand*{\cleartoleftpage}{%
+  \clearpage\ifodd\value{page}\else%
+    \thispagestyle{empty}\hbox{}\newpage%
+  \fi%
+}
+
+% Struts for added vertical spacing in tabular environments
+% Insert struts directly in nominator/denominator/sub-/superscripts of fractions/sums etc.!
+\newcommand*\TStrut{\rule{0pt}{2.6ex}}       % Top strut
+\newcommand*\BStrut{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
+
+% unit conversion: \convertto{mm}{25}
+% % pt, mm, cm, ex, em, bp, dd, pc, in
+\def\convertto#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1\relax#1}
+
+% CHF unit (swiss francs)
+\newcommand*{\CHF}[1]{CHF~$\num{#1}.-$}
+
+% tables
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}  % loads array package
+% tabular: fixed width left-justified column
+\newcolumntype{P}[1]{>{\raggedright\let\newline\\\arraybackslash}m{#1}}
+% tabular: fixed width centered column
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash}m{#1}}
+% tabularx: left-justified column type for tabularx
+\newcolumntype{L}{>{\raggedright\let\newline\\\arraybackslash}X}
+% tabularx: centered column type for tabularx
+\newcolumntype{Z}{>{\centering\arraybackslash}X}
+
+% lists
+\RequirePackage[inline]{enumitem}
+\newlist{myenum}{enumerate}{2}
+\newlist{myitem}{itemize}{2}
+\newlist{mydotitem}{itemize}{2}
+\newlist{alphenum}{enumerate}{2}
+\setlist[myenum,1,2]{label=\arabic*.,leftmargin=*,nosep,align=left}
+\setlist[myitem,1,2]{label=--,leftmargin=*,nosep,align=left}
+\newcommand{\localtextbulletone}{\textcolor{gray}{\raisebox{.3ex}{\rule{.7ex}{.7ex}}}}
+\setlist[mydotitem,1,2]{label=\localtextbulletone,leftmargin=*,nosep,align=left}
+\setlist[alphenum,1,2]{label=\alph*),leftmargin=*,nosep,align=left,widest=a}  % manually set "widest=m" if list is long
+
+
+% checklist
+\newcommand*{\checkbox}{\fboxsep=-.15pt\fbox{\rule{0pt}{1.4ex}\rule{1.4ex}{0pt}}}
+\newlist{checklist}{itemize}{2}
+\setlist[checklist,1,2]{label=\checkbox,leftmargin=*,nosep,align=left,itemsep=1ex}
+
+% ----------
+% tabbedenum: horizontal alphanumeric lists (for exercises)
+%
+% keys
+\ExplSyntaxOn
+\keys_define:nn{basicMacros/tabbedenum}
+{%
+  space-above  .tl_set:N = \l__basicMacros_SpaceAbove_tl,
+  space-below  .tl_set:N = \l__basicMacros_SpaceBelow_tl,
+  line-spacing .tl_set:N = \l__basicMacros_LineSpacing_tl,
+  label        .tl_set:N = \l__basicMacros_Label_tl,
+  space-above  .value_required:n = true,
+  space-below  .value_required:n = true,
+  line-spacing .value_required:n = true,
+  label        .value_required:n = true,
+  space-above  .initial:n = 0ex,
+  space-below  .initial:n = 0ex,
+  line-spacing .initial:n = 1.2,
+  label        .initial:n = \alph*),
+}
+
+% \begin{tabbedenum}[space above=0ex,space below=0ex]{2} ...
+% args: #1 (optional): space above/below, #2: \item...
+% http://tex.stackexchange.com/questions/34971/how-to-keep-a-constant-baselineskip-when-using-minipages-or-parboxes
+%
+\RequirePackage{tabto}
+\NewDocumentEnvironment{tabbedenum}{ o m }
+{%
+  \group_begin:
+    \IfNoValueF{#1}{\keys_set:nn{basicMacros/tabbedenum}{#1}}
+    \par\vskip \l__basicMacros_SpaceAbove_tl
+    \NumTabs{#2}
+    \begin{minipage}[t]{\linewidth}
+      \linespread{\l__basicMacros_LineSpacing_tl}\selectfont
+      \begin{enumerate*}[label=\l__basicMacros_Label_tl,itemjoin={\tab}]%
+}{%
+      \end{enumerate*}%
+      \par\xdef\tpd{\the\prevdepth}
+    \end{minipage}
+    \par\prevdepth\tpd
+    \par\vspace{\l__basicMacros_SpaceBelow_tl}
+  \group_end:
+}
+
