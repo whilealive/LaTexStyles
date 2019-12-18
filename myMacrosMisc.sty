@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Miscellaneous macro collection (LuaLaTeX)
 %
-% DATE     04.12.2019
+% DATE     18.12.2019
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -26,6 +26,12 @@
 \newlength{\AfterSkip}
 \setlength{\AfterSkip}{\baselineskip}
 \newcommand*{\SpaceBelow}{\par\addvspace{\AfterSkip}\DoNotAddBlank}
+% https://tex.stackexchange.com/questions/387215/how-to-extract-integer-part-and-fractional-part-of-a-decimal-number
+\newcommand*{\IntPart}[1]{\expandafter\int@part#1..\@nil}  % \IntPart{7.35} -> 7
+\def\int@part#1.#2.#3\@nil{\if\relax#1\relax0\else#1\fi}
+\newcommand*{\FracPart}[1]{\expandafter\frac@part#1..\@nil}  % \FracPart{7.35} -> 35
+\def\frac@part#1.#2.#3\@nil{\if\relax#2\relax0\else#2\fi}
+
 
 
 % ----------------------------------------------------------------
@@ -54,7 +60,13 @@
 \def\convertto#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1\relax#1}
 
 % CHF unit (swiss francs)
-\newcommand*{\CHF}[1]{CHF~$\num{#1}.-$}
+\newcommand*{\CHF}[1]{%
+  \ifnum\FracPart{#1}=0%
+    CHF~$\num{\IntPart{#1}}.-$%
+  \else%
+    CHF~$\num{#1}$%
+  \fi%
+}%
 
 % tables
 \RequirePackage{booktabs}
