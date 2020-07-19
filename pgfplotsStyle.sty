@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     pgfplots macros etc.
 %
-% DATE     26.09.2019
+% DATE     19.07.2020
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -19,11 +19,13 @@
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=newest}
 
+% nicer arrow tip
 \usetikzlibrary{arrows.meta}
 \pgfplotsset{%
   axis lines=center,%
   axis line style={-Latex},%
 }
+\tikzset{>={Latex}}  % for regular tikz arrows (not axis lines)
 
 % Boxplot etc..
 \usepgfplotslibrary{statistics}
