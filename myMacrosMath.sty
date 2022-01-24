@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     Mathematical macro collection (LuaLaTeX)
 %
-% DATE     04.12.2019
+% DATE     24.01.2022
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -124,6 +124,7 @@
 % TODO: \nopagebreak for all exercise environments...
 \newcounter{excounter}
 \renewcommand*{\theexcounter}{\arabic{excounter}}
+\newcommand*{\resetexcounter}{\setcounter{excounter}{0}}
 
 \newenvironment{AufgLsg}[1]{% adds label for solution -> see LsgAufg
   \refstepcounter{excounter}%
