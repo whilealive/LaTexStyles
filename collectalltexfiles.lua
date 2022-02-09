@@ -3,19 +3,19 @@
 -- INFO     recurses down a directory tree and inputs all the tex-files found
 --          https://tex.stackexchange.com/questions/7653/how-to-iterate-through-the-name-of-files-in-a-folder
 --
---          use as follows (luacode-package required!):
---          \begin{luacode}
---            require("collectalltexfiles.lua")
---            CollectAllTexFiles(lfs.currentdir() .. "/DL-GESO-Aufgaben/")
---          \end{luacode}
+--          use as follows:
+--          \directlua{
+--            require('collectalltexfiles.lua')
+--            inputTexFiles.inputBasic(dir)
+--          }
 --
--- DATE     12.06.2018
+-- DATE     09.02.2022
 -- OWNER    Bischofberger
 -- ==================================================================
 
 -- dirtree iterator:
 -- to be found at: http://lua-users.org/wiki/DirTreeIterator
-function dirtree(dir)
+local function dirtree(dir)
   if string.sub(dir, -1) == "/" then
     dir=string.sub(dir, 1, -2)
   end
@@ -37,12 +37,12 @@ function dirtree(dir)
 end
 
 
-function GetFileExtension(filename)
+local function GetFileExtension(filename)
   return filename:match("^.+(%..+)$")
 end
 
 
-function isValidTexFile(filename)
+local function isValidTexFile(filename)
   if filename:match("_QuickCompile") then
     return false
   end
@@ -53,9 +53,7 @@ function isValidTexFile(filename)
 end
 
 
-function CollectAllTexFiles(dir)
-  -- Lua doesn't guarantee any iteration order for the associative part of the table!
-  -- Therefore, we must order the entries manually
+local function getListOfValidFilenames(dir)
   local filenames = {}
 
   for i in dirtree(dir) do
@@ -65,10 +63,34 @@ function CollectAllTexFiles(dir)
     end
   end
 
+  -- Lua doesn't guarantee any iteration order for the associative part of the table!
+  -- Therefore, we must order the entries manually
   table.sort(filenames)
 
+  return filenames
+end
+
+
+----------------------------------------------------------------
+-- global inputTexFiles-«class»
+-- these functions will be called externally from the .tex-Files
+
+inputTexFiles = {}
+
+-- input without any additional information
+function inputTexFiles.inputBasic(dir)
+  local filenames = getListOfValidFilenames(dir)
   for i = 1, #filenames do
-    tex.sprint("[" .. filenames[i] .. "]\\BZ" .. "\\input " .. dir .. filenames[i] .. " " .. "\\clearpage\\par")
-    --tex.sprint(dir .. filenames[i] .. "\\BZ")  -- debugging
+    tex.sprint("\\input " .. dir .. filenames[i] .. " " .. "\\clearpage\\par")
   end
 end
+
+-- input and print actual filename above content
+function inputTexFiles.inputWithFilenames(dir)
+  local filenames = getListOfValidFilenames(dir)
+  for i = 1, #filenames do
+    tex.sprint("[" .. filenames[i] .. "]\\BZ" .. "\\input " .. dir .. filenames[i] .. " " .. "\\clearpage\\par")
+  end
+end
+
+----------------------------------------------------------------
