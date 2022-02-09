@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     collection of tikz macros
 %
-% DATE     31.08.2019
+% DATE     09.02.2022
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -37,12 +37,12 @@
 % Extraxt x-/y-Coordinates
 \newdimen\XCoord
 \newdimen\YCoord
-\newcommand*{\ExtractCoordinate}[1]{\path (#1); \pgfgetlastxy{\XCoord}{\YCoord};}
+\newcommand*{\ExtractCoordinate}[1]{\path (#1); \pgfgetlastxy{\XCoord}{\YCoord}}
 
 \newcommand*{\WSW}[5]{% #1:alpha, #2:A, #3:B, #4:beta , #5:C (will be redefined)
   % 1. compute distance between A and B
   \coordinate (AB) at ($(#3)-(#2)$);
-  \ExtractCoordinate{AB};  % !!! units in pt !!!
+  \ExtractCoordinate{AB}  % !!! units in pt !!!
   \pgfmathsetmacro{\ABLength}{veclen(\XCoord,\YCoord)}
 
   % 2. compute third angle in triangle
@@ -54,12 +54,12 @@
 
   % 4. compute C using rotation matrix
   \coordinate (ABNormed) at ($1/\ABLength*(AB)$);
-  \ExtractCoordinate{ABNormed};  % !!! units in pt !!!
+  \ExtractCoordinate{ABNormed}  % !!! units in pt !!!
   \pgfmathsetmacro{\ABNormedLength}{veclen(\XCoord,\YCoord)}
   \pgfmathsetmacro{\CosAlpha}{cos(#1)}
   \pgfmathsetmacro{\SinAlpha}{sin(#1)}
-  \pgfmathsetmacro{\cx}{\ACLength*((\CosAlpha*\XCoord) + (-\SinAlpha*\YCoord))};
-  \pgfmathsetmacro{\cy}{\ACLength*((\SinAlpha*\XCoord) + ( \CosAlpha*\YCoord))};
+  \pgfmathsetmacro{\cx}{\ACLength*((\CosAlpha*\XCoord) + (-\SinAlpha*\YCoord))}
+  \pgfmathsetmacro{\cy}{\ACLength*((\SinAlpha*\XCoord) + ( \CosAlpha*\YCoord))}
   \coordinate (#5) at ($(#2)+(\cx pt,\cy pt)$);
 }
 
