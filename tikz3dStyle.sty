@@ -3,7 +3,7 @@
 % MACHINE  all
 % INFO     tikz macros etc. for 3D drawings
 %
-% DATE     14.01.2019
+% DATE     11.05.2022
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -16,10 +16,11 @@
 
 \ProvidesPackage{tikz3dStyle}
 
-\RequirePackage{tikz-3dplot}
-
 % 3D-coordinate system (pure tikz, no tikz-3dplot package here)
 \tikzset{my-3d-coord/.style={rotate around x=-90,rotate around z=-90}}
 
-
+% tikz-3dplot package
+\RequirePackage{tikz-3dplot}
 \newcommand*{\SetStdMainCoords}{\tdplotsetmaincoords{70}{110}}
+
+
