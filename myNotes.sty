@@ -1,9 +1,8 @@
 % ==================================================================
 % FILE     myNotes.sty
-% MACHINE  all
 % INFO     Notes...
 %
-% DATE     25.10.2018
+% DATE     09.11.2022
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -67,17 +66,19 @@
 \def\@Measurepage{\dimexpr\textheight-\pagetotal-2\pgflinewidth\relax}
 
 
-% internal: print all involved sizes (for \FillNotes command)
+% local debugging macros
 %
+\def\@convertto#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1\relax#1}
+
 \def\@PrintFillNotesDebuggingInformation
 {%
   \ifmyNotesDebug
     \draw (0,0) node[above right,align=left] 
     {%
-      textheight: \convertto{mm}{\textheight}\\
-      pagetotal: \convertto{mm}{\pagetotal}\\
+      textheight: \@convertto{mm}{\textheight}\\
+      pagetotal: \@convertto{mm}{\pagetotal}\\
       pgflinewidth: \the\pgflinewidth\\
-      size of squares: \convertto{mm}{\sizeOfSquares pt}\\
+      size of squares: \@convertto{mm}{\sizeOfSquares pt}\\
       \pgfmathparse{\@Measurepage/\sizeOfSquares} Measurepage/sizeOfSquares: \pgfmathresult pt\\
       \pgfmathparse{int(\@Measurepage/\sizeOfSquares)} same as int (number of rows): \pgfmathresult%
     };
