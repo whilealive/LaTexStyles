@@ -4,7 +4,7 @@
 % INFO     basic layout for all my LuaLaTeX Documents
 %          Font: Lucida Bright (TUG)
 %
-% DATE     03.05.2023
+% DATE     31.08.2023
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -18,8 +18,8 @@
 \ProvidesPackage{basicLayoutLT}
 
 % fonts
-\RequirePackage{mathtools}       % to be loaded before unicode-math, will load fontspec
-\RequirePackage{unicode-math}    % support opentype math fonts (load after mathtools!)
+\RequirePackage{mathtools}  % to be loaded before unicode-math, will load fontspec
+\RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}  % support opentype math fonts (load after mathtools!)
 \RequirePackage{lucidaBrightOT}  % set fonts, kerning etc.
 
 % language
