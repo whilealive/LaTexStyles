@@ -2,7 +2,7 @@
 % FILE     myMacrosMisc.sty
 % INFO     Miscellaneous macro collection (LuaLaTeX)
 %
-% DATE     17.05.2023
+% DATE     04.09.2023
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -51,8 +51,8 @@
 
 % Struts for added vertical spacing in tabular environments
 % Insert struts directly in nominator/denominator/sub-/superscripts of fractions/sums etc.!
-\newcommand*\TStrut{\rule{0pt}{2.6ex}}       % Top strut
-\newcommand*\BStrut{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
+\newcommand*\TStrut[1][2.6ex]{\rule{0pt}{#1}}        % Top strut
+\newcommand*\BStrut[1][-1.2ex]{\rule[#1]{0pt}{0pt}}  % Bottom strut
 
 % unit conversion: \convertto{mm}{25}
 % % pt, mm, cm, ex, em, bp, dd, pc, in
