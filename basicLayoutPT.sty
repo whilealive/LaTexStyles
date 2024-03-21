@@ -1,0 +1,73 @@
+% ==================================================================
+% FILE     basicLayoutPT.sty
+% MACHINE  all
+% INFO     basic layout for all my pdfTeX Documents
+%          Font: latin modern
+%
+% DATE     21.03.2024
+% OWNER    Bischofberger
+% ==================================================================
+
+\ProvidesPackage{basicLayoutLT}
+
+% fonts
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8x]{inputenc}
+\RequirePackage[ngerman]{babel}
+\RequirePackage{lmodern}
+
+% math packages
+\RequirePackage{mathtools}
+\RequirePackage{amssymb}
+
+% language
+\RequirePackage[ngerman]{babel}
+
+% global settings
+\setlength{\parindent}{0pt}
+\allowdisplaybreaks
+
+% typography, symbols etc.
+\RequirePackage[babel=true]{microtype}
+\RequirePackage[hyphens]{url}
+
+% header/footer
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+
+% redefine sectional commands
+\renewcommand\section{\@startsection
+  {section}{1}{0mm}%
+  {-2\baselineskip}%
+  {2ex}%
+  {\sffamily\Large\bfseries}%
+}%
+\renewcommand\subsection{\@startsection
+  {subsection}{2}{0mm}%
+  {-2\baselineskip}%
+  {1ex}%
+  {\sffamily\large\bfseries}%
+}%
+\renewcommand\subsubsection{\@startsection
+  {subsubsection}{3}{0mm}%
+  {-\baselineskip}%
+  {1sp}%
+  {\sffamily\normalsize\bfseries}%
+}%
+
+% floats, figures, captions...
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\captionsetup[figure]{%
+  name=Abb,
+  font=small,
+  format=plain,
+  justification=raggedright,
+  singlelinecheck=false%
+}
+
+% modify margins on the fly with "\begin{adjustwidth}{-20mm}{-10mm}"
+\usepackage[strict]{changepage}
+
+% do not try to fill page vertically
+\raggedbottom
