@@ -135,36 +135,3 @@
 \ExplSyntaxOff
 % ----------
 
-
-% ----------------------------------------------------------------
-% all about Exercises...
-% ----------------------------------------------------------------
-% TODO: \nopagebreak for all exercise environments...
-\newcounter{excounter}
-\renewcommand*{\theexcounter}{\arabic{excounter}}
-\newcommand*{\resetexcounter}{\setcounter{excounter}{0}}
-
-\newenvironment{AufgLsg}[1]{% adds label for solution -> see LsgAufg
-  \refstepcounter{excounter}%
-  \SpaceAbove%
-  \label{#1}%
-  \BZ\noindent\textbf{Aufgabe~\theexcounter\enspace}%
-}{\SpaceBelow}
-
-\newenvironment{Aufg}[1][\theexcounter]{% normal
-  \ifx\theexcounter#1\refstepcounter{excounter}\fi%
-  \SpaceAbove%
-  \BZ\noindent\textbf{Aufgabe~#1\enspace}%
-}{\SpaceBelow}
-
-\newenvironment{Aufg*}[1][\theexcounter]{% difficult
-  \ifx\theexcounter#1\refstepcounter{excounter}\fi%
-  \SpaceAbove%
-  \BZ\noindent\textbf{Aufgabe~#1*\enspace}%
-}{\SpaceBelow}
-
-% solution of a single exercise
-\newenvironment{LsgAufg}[1]{%
-  \textbf{Aufg. \ref{#1} }%
-}{\par\addvspace{.5\baselineskip}}
-
