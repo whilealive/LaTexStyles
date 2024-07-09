@@ -2,7 +2,7 @@
 % FILE     myMacrosMath.sty
 % INFO     Mathematical macro collection (LuaLaTeX)
 %
-% DATE     22.03.2024
+% DATE     09.07.2024
 % OWNER    Bischofberger
 % ==================================================================
 % This work may be distributed and/or modified under the
@@ -16,7 +16,6 @@
 
 \ProvidesPackage{myMacrosMath}
 
-
 % units
 \RequirePackage{siunitx}
 \sisetup{per-mode=symbol,exponent-product=\cdot}
@@ -28,19 +27,23 @@
 \DeclareSIUnit\monaten{\text{Monaten}}
 \DeclareSIUnit\monat{\text{Monat}}
 
-
 % double-underline
 \newcommand{\Result}[2][0ex]{\underline{\underline{#2\rule[-0.6ex-#1]{0pt}{0pt}}}}
 \newcommand{\ResultBelow}[2][0ex]{\makebox[0pt][l]{\Result[#1]{\phantom{#2}}}}  % usable in align-env. -> for template see snippy
 
-
 % nth root
 \newcommand*{\NthRoot}[2]{\sqrt[\leftroot{0}\uproot{0}\scriptstyle #1]{#2}}
-
 
 % absolute value
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 
+% intervals
+% [a;b] --> \interval{a}{b}
+% (a;b] --> \linterval{a}{b}
+% [a;b) --> \rinterval{a}{b}
+% (a;b) --> \ointerval{a}{b}
+\RequirePackage{interval}
+\intervalconfig{soft open fences, separator symbol={;}}
 
 % sets and constants
 \newcommand*{\N}{\ensuremath{\mathbb{N}}}
@@ -57,18 +60,14 @@
 \DeclareMathOperator{\Var}{Var} % variance (stochastics)
 \newcommand*{\HalfLife}{\ensuremath{T_{1/2}}}  % Halbwertszeit
 \newcommand*{\VV}[1]{\ensuremath{\overrightarrow{#1}}}  % vectors...
-
 \newcommand*{\Logic}[1]{\textsf{\textbf{#1}}}  % sets (logic)
-
 
 % radiant angle: frown above (could be improved...)
 \newcommand*\Radiant[2][\textstyle]{\ensuremath{%
   \kern-.7em\array[b]{c}\text{\scalebox{1.6}{$#1\frown$}}\\[-1.8ex]#1#2\endarray}\kern-0.8em}
 
-
 % cancel stuff (reduce fractions)
 \RequirePackage[makeroom]{cancel}
-
 
 % Theorems
 \newenvironment{Bsp}{\SpaceAbove\BZ\noindent\textbf{Beispiel\enspace}}{\SpaceBelow}
@@ -77,7 +76,6 @@
 \newenvironment{Faz}{\SpaceAbove\BZ\noindent\textbf{Fazit\enspace}}{\SpaceBelow}
 \newenvironment{Thm}{\SpaceAbove\BZ\noindent\textbf{Satz\enspace}}{\SpaceBelow}
 \newenvironment{Sol}{\SpaceAbove\BZ\noindent\textit{Lösung\enspace}}{\SpaceBelow}
-
 
 % definition frame
 \RequirePackage[xcolor]{mdframed}
@@ -99,7 +97,6 @@
   \end{mdframed}
   \DoNotAddBlank
 }
-
 
 % ----------
 % myfrac: modifiable fractions
